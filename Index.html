@@ -322,6 +322,93 @@ body {
   margin-bottom: 0;
 }
 
+.service-price-from {
+  font-family: 'Jost', sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--bone-mid);
+  margin-top: 24px;
+}
+.service-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 36px;
+  font-weight: 300;
+  color: var(--white);
+}
+
+/* ── PACKAGES ── */
+.packages { background: var(--bone); padding: 120px 56px; }
+.packages-inner { max-width: 1100px; margin: 0 auto; }
+.packages .section-title { color: var(--black); }
+.packages .section-title em { color: var(--olive); }
+.packages .section-num { color: var(--olive); }
+.packages-table { margin-top: 0; border: 1px solid rgba(86,84,73,0.2); }
+.pkg-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  border-bottom: 1px solid rgba(86,84,73,0.15);
+  transition: background 0.3s;
+}
+.pkg-row:last-child { border-bottom: none; }
+.pkg-row:not(.pkg-header):hover { background: rgba(255,251,244,0.6); }
+.pkg-header { background: var(--olive); }
+.pkg-cell {
+  padding: 24px 28px;
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--olive);
+  border-right: 1px solid rgba(86,84,73,0.15);
+  display: flex;
+  align-items: center;
+}
+.pkg-cell:last-child { border-right: none; }
+.pkg-header .pkg-cell {
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--bone);
+  padding: 18px 28px;
+}
+.pkg-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--black);
+  margin-bottom: 4px;
+}
+.pkg-sub { font-size: 12px; color: rgba(86,84,73,0.6); }
+.pkg-price-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 300;
+  color: var(--black);
+}
+.pkg-badge {
+  display: inline-block;
+  background: var(--black);
+  color: var(--bone);
+  font-family: 'Jost', sans-serif;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+.pkg-note {
+  margin-top: 18px;
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  color: var(--olive);
+  opacity: 0.6;
+  letter-spacing: 0.05em;
+}
+
 /* ── SERVICE CATEGORIES ── */
 .services-category { margin-bottom: 2px; }
 .services-category-label {
@@ -671,16 +758,22 @@ footer {
           <span class="service-icon">◈</span>
           <div class="service-name">Brand Strategy</div>
           <p class="service-desc">Before any visual is created, the story must be clear. I work with you to define your brand's positioning, voice, audience, and direction — the foundation everything else is built on.</p>
+          <div class="service-price-from">From</div>
+          <div class="service-price">OMR 800</div>
         </div>
         <div class="service-card">
           <span class="service-icon">◉</span>
           <div class="service-name">Branding</div>
           <p class="service-desc">A complete visual identity — logo, typography, color system, brand guidelines. Built to be distinctive, consistent, and true to who you are. Not a template. A brand.</p>
+          <div class="service-price-from">From</div>
+          <div class="service-price">OMR 500</div>
         </div>
         <div class="service-card">
           <span class="service-icon">◎</span>
           <div class="service-name">Marketing Strategy &amp; Plans</div>
           <p class="service-desc">Strategic marketing direction tailored to your business — from go-to-market plans to content strategies and campaign frameworks that connect with your audience and drive results.</p>
+          <div class="service-price-from">From</div>
+          <div class="service-price">OMR 1,200</div>
         </div>
       </div>
     </div>
@@ -693,16 +786,22 @@ footer {
           <span class="service-icon">▣</span>
           <div class="service-name">Creative Design</div>
           <p class="service-desc">From social media assets to print collateral, campaign visuals to brand touchpoints — every piece of design is intentional, on-brand, and built to communicate clearly.</p>
+          <div class="service-price-from">From</div>
+          <div class="service-price">OMR 250</div>
         </div>
         <div class="service-card">
           <span class="service-icon">⬡</span>
           <div class="service-name">Packaging Custom Design</div>
           <p class="service-desc">Packaging is the first physical experience of your brand. I design custom packaging that makes a product feel premium before it's even opened — structure, material, and storytelling in one.</p>
+          <div class="service-price-from">From</div>
+          <div class="service-price">OMR 150</div>
         </div>
         <div class="service-card">
           <span class="service-icon">✦</span>
           <div class="service-name">Illustration &amp; Creative Concepts</div>
           <p class="service-desc">Original illustration and conceptual art that gives brands a unique visual language. Hand-crafted, distinctive, and impossible to replicate — because it's created specifically for you.</p>
+          <div class="service-price-from">From</div>
+          <div class="service-price">OMR 150</div>
         </div>
       </div>
     </div>
@@ -715,20 +814,125 @@ footer {
           <span class="service-icon">◫</span>
           <div class="service-name">Product Photography</div>
           <p class="service-desc">Clean, styled, and story-driven product imagery built for e-commerce, menus, and social. Every frame is composed to sell — not just to show.</p>
+          <div class="service-price-from">From</div>
+          <div class="service-price">OMR 80</div>
         </div>
         <div class="service-card">
           <span class="service-icon">◷</span>
           <div class="service-name">Headshots</div>
           <p class="service-desc">Portraits that communicate authority and trust. Directed, not just snapped — so the person in the frame looks like the professional they are.</p>
+          <div class="service-price-from">From</div>
+          <div class="service-price">OMR 90</div>
         </div>
         <div class="service-card">
           <span class="service-icon">◈</span>
           <div class="service-name">Personal Branding Portraits</div>
           <p class="service-desc">A full visual identity session — locations, styling, direction, narrative. For founders and creatives who are ready to own their story publicly.</p>
+          <div class="service-price-from">From</div>
+          <div class="service-price">OMR 120</div>
         </div>
       </div>
     </div>
 
+  </div>
+</section>
+
+<!-- ── PHOTOGRAPHY PACKAGES ── -->
+<section class="packages" id="packages">
+  <div class="packages-inner">
+    <div class="section-header reveal">
+      <h2 class="section-title">Photography <em>packages</em></h2>
+      <span class="section-num">— 02</span>
+    </div>
+
+    <!-- PRODUCT PHOTOGRAPHY -->
+    <p style="font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--olive);margin-bottom:16px;margin-top:64px;" class="reveal">Product Photography</p>
+    <div class="packages-table reveal">
+      <div class="pkg-row pkg-header">
+        <div class="pkg-cell">Package</div>
+        <div class="pkg-cell">Products</div>
+        <div class="pkg-cell">Edited Images</div>
+        <div class="pkg-cell">Price (OMR)</div>
+      </div>
+      <div class="pkg-row">
+        <div class="pkg-cell"><div><div class="pkg-name">Starter</div><div class="pkg-sub">Clean background, 2 angles per product</div></div></div>
+        <div class="pkg-cell">5</div>
+        <div class="pkg-cell">12</div>
+        <div class="pkg-cell"><span class="pkg-price-val">80</span></div>
+      </div>
+      <div class="pkg-row">
+        <div class="pkg-cell"><div><div class="pkg-name">Pro <span class="pkg-badge">Popular</span></div><div class="pkg-sub">Styled backgrounds, lifestyle context, 3 angles</div></div></div>
+        <div class="pkg-cell">15</div>
+        <div class="pkg-cell">35</div>
+        <div class="pkg-cell"><span class="pkg-price-val">350</span></div>
+      </div>
+      <div class="pkg-row">
+        <div class="pkg-cell"><div><div class="pkg-name">Premium</div><div class="pkg-sub">Full creative direction, campaign-ready imagery</div></div></div>
+        <div class="pkg-cell">30</div>
+        <div class="pkg-cell">70</div>
+        <div class="pkg-cell"><span class="pkg-price-val">950</span></div>
+      </div>
+    </div>
+
+    <!-- HEADSHOTS -->
+    <p style="font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--olive);margin-bottom:16px;margin-top:48px;" class="reveal">Headshots</p>
+    <div class="packages-table reveal">
+      <div class="pkg-row pkg-header">
+        <div class="pkg-cell">Package</div>
+        <div class="pkg-cell">Session</div>
+        <div class="pkg-cell">Edited Selects</div>
+        <div class="pkg-cell">Price (OMR)</div>
+      </div>
+      <div class="pkg-row">
+        <div class="pkg-cell"><div><div class="pkg-name">Starter</div><div class="pkg-sub">1 outfit · 1 backdrop</div></div></div>
+        <div class="pkg-cell">30 min</div>
+        <div class="pkg-cell">8</div>
+        <div class="pkg-cell"><span class="pkg-price-val">90</span></div>
+      </div>
+      <div class="pkg-row">
+        <div class="pkg-cell"><div><div class="pkg-name">Pro <span class="pkg-badge">Popular</span></div><div class="pkg-sub">2 outfits · indoor + outdoor · LinkedIn crop</div></div></div>
+        <div class="pkg-cell">60 min</div>
+        <div class="pkg-cell">18</div>
+        <div class="pkg-cell"><span class="pkg-price-val">280</span></div>
+      </div>
+      <div class="pkg-row">
+        <div class="pkg-cell"><div><div class="pkg-name">Premium</div><div class="pkg-sub">3 outfits · location scouting · corporate team option</div></div></div>
+        <div class="pkg-cell">2 hrs</div>
+        <div class="pkg-cell">35</div>
+        <div class="pkg-cell"><span class="pkg-price-val">900</span></div>
+      </div>
+    </div>
+
+    <!-- PERSONAL BRANDING -->
+    <p style="font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--olive);margin-bottom:16px;margin-top:48px;" class="reveal">Personal Branding Portraits</p>
+    <div class="packages-table reveal">
+      <div class="pkg-row pkg-header">
+        <div class="pkg-cell">Package</div>
+        <div class="pkg-cell">Session</div>
+        <div class="pkg-cell">Edited Images</div>
+        <div class="pkg-cell">Price (OMR)</div>
+      </div>
+      <div class="pkg-row">
+        <div class="pkg-cell"><div><div class="pkg-name">Starter</div><div class="pkg-sub">1 location · 2 outfits · brand questionnaire</div></div></div>
+        <div class="pkg-cell">60 min</div>
+        <div class="pkg-cell">20</div>
+        <div class="pkg-cell"><span class="pkg-price-val">120</span></div>
+      </div>
+      <div class="pkg-row">
+        <div class="pkg-cell"><div><div class="pkg-name">Pro <span class="pkg-badge">Popular</span></div><div class="pkg-sub">2 locations · 3 outfits · social sizing pack · content guide</div></div></div>
+        <div class="pkg-cell">2 hrs</div>
+        <div class="pkg-cell">45</div>
+        <div class="pkg-cell"><span class="pkg-price-val">420</span></div>
+      </div>
+      <div class="pkg-row">
+        <div class="pkg-cell"><div><div class="pkg-name">Premium</div><div class="pkg-sub">Multiple locations · full creative direction · corporate identity</div></div></div>
+        <div class="pkg-cell">Half day</div>
+        <div class="pkg-cell">80</div>
+        <div class="pkg-cell"><span class="pkg-price-val">1,600</span></div>
+      </div>
+    </div>
+
+    <p class="pkg-note reveal">All prices in Omani Rial (OMR) · 50% deposit to confirm · Rush delivery available · Bundles on request</p>
   </div>
 </section>
 
@@ -737,7 +941,7 @@ footer {
   <div class="process-inner">
     <div class="section-header reveal">
       <h2 class="section-title">The creative <em>journey</em></h2>
-      <span class="section-num">— 02</span>
+      <span class="section-num">— 03</span>
     </div>
     <div class="steps reveal">
       <div class="step">
