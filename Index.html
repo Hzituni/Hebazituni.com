@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heba Zituni — Creative Director & Photographer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black:    #11120D;
+  --olive:    #565449;
+  --bone:     #D8CFBC;
+  --white:    #FFFBF4;
+  --bone-mid: #C4BAA5;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--white);
+  color: var(--black);
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  background: var(--black);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  overflow: hidden;
+}
+.hero-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 72px 56px;
+  position: relative;
+  z-index: 2;
+}
+.hero-right {
+  position: relative;
+  overflow: hidden;
+}
+.hero-right::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, var(--black) 0%, transparent 40%);
+  z-index: 1;
+}
+.hero-photo-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--olive) 0%, #3a3830 50%, var(--black) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--bone);
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.35;
+}
+.eyebrow {
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--bone-mid);
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: fadeUp 0.9s ease forwards 0.2s;
+}
+.hero-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(64px, 7vw, 108px);
+  font-weight: 300;
+  line-height: 0.92;
+  color: var(--white);
+  letter-spacing: -0.02em;
+  opacity: 0;
+  animation: fadeUp 1s ease forwards 0.4s;
+}
+.hero-name em { font-style: italic; color: var(--bone); }
+.hero-tagline {
+  margin-top: 32px;
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  color: var(--bone-mid);
+  line-height: 1.9;
+  max-width: 340px;
+  opacity: 0;
+  animation: fadeUp 1s ease forwards 0.7s;
+}
+.hero-cta {
+  margin-top: 52px;
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  opacity: 0;
+  animation: fadeUp 1s ease forwards 0.9s;
+}
+.btn-primary {
+  background: var(--bone);
+  color: var(--black);
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 16px 36px;
+  transition: background 0.3s;
+}
+.btn-primary:hover { background: var(--white); }
+.btn-ghost {
+  color: var(--bone-mid);
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(216,207,188,0.3);
+  padding-bottom: 2px;
+  transition: color 0.3s, border-color 0.3s;
+}
+.btn-ghost:hover { color: var(--white); border-color: var(--bone); }
+.hero-scroll {
+  position: absolute;
+  bottom: 48px;
+  right: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  z-index: 3;
+  opacity: 0;
+  animation: fadeUp 1s ease forwards 1.2s;
+}
+.scroll-line {
+  width: 1px;
+  height: 64px;
+  background: linear-gradient(to bottom, transparent, var(--bone-mid));
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+.scroll-label {
+  font-family: 'Jost', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--bone-mid);
+  writing-mode: vertical-rl;
+}
+
+/* ── MARQUEE ── */
+.marquee-wrap {
+  background: var(--olive);
+  padding: 18px 0;
+  overflow: hidden;
+  border-top: 1px solid rgba(216,207,188,0.1);
+  border-bottom: 1px solid rgba(216,207,188,0.1);
+}
+.marquee-track {
+  display: flex;
+  white-space: nowrap;
+  animation: marquee 24s linear infinite;
+}
+.marquee-item {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-style: italic;
+  color: var(--bone);
+  letter-spacing: 0.05em;
+  padding: 0 40px;
+}
+.marquee-dot { color: var(--bone-mid); padding: 0 8px; font-style: normal; }
+
+/* ── ABOUT ── */
+.about {
+  background: var(--white);
+  padding: 120px 56px;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 0;
+}
+.about-label {
+  font-family: 'Jost', sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--olive);
+  padding-top: 10px;
+}
+.about-content {
+  border-left: 1px solid var(--bone);
+  padding-left: 64px;
+}
+.about-heading {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(34px, 4vw, 52px);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--black);
+  margin-bottom: 36px;
+  letter-spacing: -0.01em;
+}
+.about-heading em { font-style: italic; color: var(--olive); }
+.about-text {
+  font-family: 'Jost', sans-serif;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 2;
+  color: var(--olive);
+  max-width: 540px;
+  margin-bottom: 20px;
+}
+.about-text + .about-text { margin-bottom: 48px; }
+.about-stats {
+  display: flex;
+  gap: 48px;
+  padding-top: 36px;
+  border-top: 1px solid var(--bone);
+}
+.stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 42px;
+  font-weight: 300;
+  color: var(--black);
+  line-height: 1;
+}
+.stat-label {
+  font-family: 'Jost', sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--olive);
+  margin-top: 6px;
+}
+
+/* ── SERVICES ── */
+.services {
+  background: var(--black);
+  padding: 120px 56px;
+}
+.services-inner { max-width: 1100px; margin: 0 auto; }
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 28px;
+  margin-bottom: 72px;
+}
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(40px, 5vw, 66px);
+  font-weight: 300;
+  color: var(--white);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.section-title em { font-style: italic; color: var(--bone); }
+.section-num {
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  color: var(--bone-mid);
+}
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(216,207,188,0.12);
+}
+.service-card {
+  background: var(--black);
+  padding: 52px 40px;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.4s;
+}
+.service-card::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--bone);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+.service-card:hover { background: #1a1a14; }
+.service-card:hover::before { transform: scaleX(1); }
+.service-icon { font-size: 26px; margin-bottom: 28px; display: block; }
+.service-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--bone);
+  margin-bottom: 16px;
+}
+.service-desc {
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.85;
+  color: rgba(216,207,188,0.5);
+  margin-bottom: 0;
+}
+
+.service-price-from {
+  font-family: 'Jost', sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--bone-mid);
+  margin-top: 24px;
+}
+.service-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 36px;
+  font-weight: 300;
+  color: var(--white);
+}
+
+/* ── PACKAGES ── */
+.packages { background: var(--bone); padding: 120px 56px; }
+.packages-inner { max-width: 1100px; margin: 0 auto; }
+.packages .section-title { color: var(--black); }
+.packages .section-title em { color: var(--olive); }
+.packages .section-num { color: var(--olive); }
+.packages-table { margin-top: 0; border: 1px solid rgba(86,84,73,0.2); }
+.pkg-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  border-bottom: 1px solid rgba(86,84,73,0.15);
+  transition: background 0.3s;
+}
+.pkg-row:last-child { border-bottom: none; }
+.pkg-row:not(.pkg-header):hover { background: rgba(255,251,244,0.6); }
+.pkg-header { background: var(--olive); }
+.pkg-cell {
+  padding: 24px 28px;
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--olive);
+  border-right: 1px solid rgba(86,84,73,0.15);
+  display: flex;
+  align-items: center;
+}
+.pkg-cell:last-child { border-right: none; }
+.pkg-header .pkg-cell {
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--bone);
+  padding: 18px 28px;
+}
+.pkg-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--black);
+  margin-bottom: 4px;
+}
+.pkg-sub { font-size: 12px; color: rgba(86,84,73,0.6); }
+.pkg-price-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 300;
+  color: var(--black);
+}
+.pkg-badge {
+  display: inline-block;
+  background: var(--black);
+  color: var(--bone);
+  font-family: 'Jost', sans-serif;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+.pkg-note {
+  margin-top: 18px;
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  color: var(--olive);
+  opacity: 0.6;
+  letter-spacing: 0.05em;
+}
+
+/* ── SERVICE CATEGORIES ── */
+.services-category { margin-bottom: 2px; }
+.services-category-label {
+  font-family: 'Jost', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--bone-mid);
+  background: rgba(216,207,188,0.07);
+  padding: 14px 24px;
+  border-left: 2px solid var(--bone);
+  margin-bottom: 1px;
+}
+
+/* ── NEWSLETTER ── */
+.newsletter {
+  background: var(--black);
+  padding: 100px 56px;
+  border-top: 1px solid rgba(216,207,188,0.08);
+}
+.newsletter-inner {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+}
+.newsletter-eyebrow {
+  font-family: 'Jost', sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--bone-mid);
+  margin-bottom: 20px;
+  display: block;
+}
+.newsletter-heading {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 300;
+  color: var(--white);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin-bottom: 16px;
+}
+.newsletter-heading em { font-style: italic; color: var(--bone); }
+.newsletter-sub {
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(216,207,188,0.55);
+  line-height: 1.8;
+  margin-bottom: 40px;
+}
+.newsletter-form {
+  display: flex;
+  gap: 0;
+  max-width: 480px;
+  margin: 0 auto;
+}
+.newsletter-input {
+  flex: 1;
+  background: rgba(216,207,188,0.06);
+  border: 1px solid rgba(216,207,188,0.15);
+  border-right: none;
+  color: var(--white);
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  padding: 16px 20px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+.newsletter-input::placeholder { color: rgba(216,207,188,0.3); }
+.newsletter-input:focus { border-color: rgba(216,207,188,0.4); }
+.newsletter-btn {
+  background: var(--bone);
+  color: var(--black);
+  font-family: 'Jost', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  border: none;
+  padding: 16px 28px;
+  cursor: pointer;
+  transition: background 0.3s;
+  white-space: nowrap;
+}
+.newsletter-btn:hover { background: var(--white); }
+.newsletter-note {
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  font-weight: 300;
+  color: rgba(216,207,188,0.3);
+  margin-top: 16px;
+  letter-spacing: 0.05em;
+}
+
+/* ── SERVICE CARD — remove price styles no longer needed ── */
+.process { background: var(--white); padding: 120px 56px; }
+.process-inner { max-width: 1100px; margin: 0 auto; }
+.process .section-title { color: var(--black); }
+.process .section-title em { color: var(--olive); }
+.process .section-num { color: var(--olive); }
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: 72px;
+  border-top: 1px solid var(--bone);
+}
+.step {
+  padding: 48px 32px 48px 0;
+  border-right: 1px solid var(--bone);
+}
+.step:last-child { border-right: none; padding-left: 32px; padding-right: 0; }
+.step:not(:first-child):not(:last-child) { padding-left: 32px; }
+.step-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 72px;
+  font-weight: 300;
+  color: var(--bone);
+  line-height: 1;
+  margin-bottom: 20px;
+  letter-spacing: -0.03em;
+}
+.step-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--black);
+  margin-bottom: 12px;
+}
+.step-desc {
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.85;
+  color: var(--olive);
+}
+
+/* ── CONTACT ── */
+.contact { background: var(--olive); padding: 120px 56px; text-align: center; }
+.contact-inner { max-width: 680px; margin: 0 auto; }
+.contact-eyebrow {
+  font-family: 'Jost', sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--bone-mid);
+  margin-bottom: 24px;
+  display: block;
+}
+.contact-heading {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(42px, 6vw, 72px);
+  font-weight: 300;
+  color: var(--white);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+}
+.contact-heading em { font-style: italic; color: var(--bone); }
+.contact-sub {
+  font-family: 'Jost', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(216,207,188,0.65);
+  line-height: 1.85;
+  margin-bottom: 56px;
+}
+.contact-links {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.contact-link {
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--bone);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(216,207,188,0.3);
+  padding-bottom: 3px;
+  transition: color 0.3s, border-color 0.3s;
+}
+.contact-link:hover { color: var(--white); border-color: var(--white); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--black);
+  padding: 32px 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(216,207,188,0.08);
+}
+.footer-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-style: italic;
+  color: var(--bone-mid);
+}
+.footer-note {
+  font-family: 'Jost', sans-serif;
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  color: rgba(216,207,188,0.3);
+  text-transform: uppercase;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.85s ease, transform 0.85s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-right { position: absolute; inset: 0; }
+  .hero-left { min-height: 100vh; background: linear-gradient(to top, rgba(17,18,13,0.96) 55%, rgba(17,18,13,0.4)); }
+  .about { grid-template-columns: 1fr; padding: 80px 28px; }
+  .about-content { border-left: none; border-top: 1px solid var(--bone); padding-left: 0; padding-top: 32px; }
+  .services-grid { grid-template-columns: 1fr; }
+  .pkg-row { grid-template-columns: 1fr 1fr; }
+  .steps { grid-template-columns: 1fr 1fr; }
+  .step { border-right: none; border-bottom: 1px solid var(--bone); padding: 32px 0 !important; }
+  footer { flex-direction: column; gap: 12px; text-align: center; }
+  .services, .packages, .process, .contact { padding-left: 28px; padding-right: 28px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="eyebrow">Creative Director &nbsp;·&nbsp; Photographer &nbsp;·&nbsp; Muscat, Oman</p>
+    <h1 class="hero-name">Heba<br><em>Zituni</em></h1>
+    <p class="hero-tagline">
+      I don't just take photographs.<br>
+      I architect visual stories that make<br>your brand impossible to ignore.
+    </p>
+    <div class="hero-cta">
+      <a href="https://wa.me/message/UQNVWTX6CAJKK1" class="btn-primary" target="_blank">Start a Project</a>
+      <a href="mailto:hello@hebazituni.com" class="btn-ghost">Explore Services</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div style="width:100%;height:100%;background:linear-gradient(135deg,#1a1a14 0%,#565449 60%,#3a3830 100%);display:flex;align-items:center;justify-content:center;">
+      <div style="opacity:0.15;font-family:'Cormorant Garamond',serif;font-size:160px;font-weight:300;color:#D8CFBC;line-height:1;letter-spacing:-0.04em;">HZ</div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span class="scroll-label">Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ── MARQUEE ── -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">Brand Strategy</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Creative Direction</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Branding</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Photography</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Packaging Design</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Marketing Strategy</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Illustration</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Creative Design</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Visual Storytelling</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">13 Years Experience</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Brand Strategy</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Creative Direction</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Branding</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Photography</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Packaging Design</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Marketing Strategy</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Illustration</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Creative Design</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Visual Storytelling</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">13 Years Experience</span><span class="marquee-dot">·</span>
+  </div>
+</div>
+
+<!-- ── ABOUT ── -->
+<section class="about reveal" style="display:grid;">
+  <div class="about-label">About</div>
+  <div class="about-content">
+    <h2 class="about-heading">Not just a photographer.<br>A <em>creative architect.</em></h2>
+    <p class="about-text">
+      Over 13 years, I've built a practice that lives at the intersection of photography, art, branding, and design. I don't arrive with a camera and leave with files — I come with a vision, a narrative, and a strategic eye trained to translate who you are into imagery that resonates before a single word is read.
+    </p>
+    <p class="about-text">
+      Every project I take on is treated as a creative brief, not a booking. I ask the questions that surface your brand's real story — then I build the visual world that tells it. For small businesses in Oman ready to be taken seriously, this is the difference between a photo and a presence.
+    </p>
+    <div class="about-stats">
+      <div>
+        <div class="stat-num">13</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div>
+        <div class="stat-num">4</div>
+        <div class="stat-label">Creative Disciplines</div>
+      </div>
+      <div>
+        <div class="stat-num">1</div>
+        <div class="stat-label">Story at a Time</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVICES ── -->
+<section class="services" id="services">
+  <div class="services-inner">
+    <div class="section-header reveal">
+      <h2 class="section-title">What I <em>offer</em></h2>
+      <span class="section-num">— 01</span>
+    </div>
+
+    <!-- CATEGORY 01 -->
+    <div class="services-category reveal">
+      <div class="services-category-label">Creative Direction &amp; Strategy</div>
+      <div class="services-grid">
+        <div class="service-card">
+          <span class="service-icon">◈</span>
+          <div class="service-name">Brand Strategy</div>
+          <p class="service-desc">Before any visual is created, the story must be clear. I work with you to define your brand's positioning, voice, audience, and direction — the foundation everything else is built on.</p>
+          <div class="service-price-from">From</div>
+          <div class="service-price">OMR 800</div>
+        </div>
+        <div class="service-card">
+          <span class="service-icon">◉</span>
+          <div class="service-name">Branding</div>
+          <p class="service-desc">A complete visual identity — logo, typography, color system, brand guidelines. Built to be distinctive, consistent, and true to who you are. Not a template. A brand.</p>
+          <div class="service-price-from">From</div>
+          <div class="service-price">OMR 500</div>
+        </div>
+        <div class="service-card">
+          <span class="service-icon">◎</span>
+          <div class="service-name">Marketing Strategy &amp; Plans</div>
+          <p class="service-desc">Strategic marketing direction tailored to your business — from go-to-market plans to content strategies and campaign frameworks that connect with your audience and drive results.</p>
+          <div class="service-price-from">From</div>
+          <div class="service-price">OMR 1,200</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CATEGORY 02 -->
+    <div class="services-category reveal" style="margin-top:2px;">
+      <div class="services-category-label">Design &amp; Art</div>
+      <div class="services-grid">
+        <div class="service-card">
+          <span class="service-icon">▣</span>
+          <div class="service-name">Creative Design</div>
+          <p class="service-desc">From social media assets to print collateral, campaign visuals to brand touchpoints — every piece of design is intentional, on-brand, and built to communicate clearly.</p>
+          <div class="service-price-from">From</div>
+          <div class="service-price">OMR 250</div>
+        </div>
+        <div class="service-card">
+          <span class="service-icon">⬡</span>
+          <div class="service-name">Packaging Custom Design</div>
+          <p class="service-desc">Packaging is the first physical experience of your brand. I design custom packaging that makes a product feel premium before it's even opened — structure, material, and storytelling in one.</p>
+          <div class="service-price-from">From</div>
+          <div class="service-price">OMR 150</div>
+        </div>
+        <div class="service-card">
+          <span class="service-icon">✦</span>
+          <div class="service-name">Illustration &amp; Creative Concepts</div>
+          <p class="service-desc">Original illustration and conceptual art that gives brands a unique visual language. Hand-crafted, distinctive, and impossible to replicate — because it's created specifically for you.</p>
+          <div class="service-price-from">From</div>
+          <div class="service-price">OMR 150</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CATEGORY 03 -->
+    <div class="services-category reveal" style="margin-top:2px;">
+      <div class="services-category-label">Photography</div>
+      <div class="services-grid">
+        <div class="service-card">
+          <span class="service-icon">◫</span>
+          <div class="service-name">Product Photography</div>
+          <p class="service-desc">Clean, styled, and story-driven product imagery built for e-commerce, menus, and social. Every frame is composed to sell — not just to show.</p>
+          <div class="service-price-from">From</div>
+          <div class="service-price">OMR 80</div>
+        </div>
+        <div class="service-card">
+          <span class="service-icon">◷</span>
+          <div class="service-name">Headshots</div>
+          <p class="service-desc">Portraits that communicate authority and trust. Directed, not just snapped — so the person in the frame looks like the professional they are.</p>
+          <div class="service-price-from">From</div>
+          <div class="service-price">OMR 90</div>
+        </div>
+        <div class="service-card">
+          <span class="service-icon">◈</span>
+          <div class="service-name">Personal Branding Portraits</div>
+          <p class="service-desc">A full visual identity session — locations, styling, direction, narrative. For founders and creatives who are ready to own their story publicly.</p>
+          <div class="service-price-from">From</div>
+          <div class="service-price">OMR 120</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── PHOTOGRAPHY PACKAGES ── -->
+<section class="packages" id="packages">
+  <div class="packages-inner">
+    <div class="section-header reveal">
+      <h2 class="section-title">Photography <em>packages</em></h2>
+      <span class="section-num">— 02</span>
+    </div>
+
+    <!-- PRODUCT PHOTOGRAPHY -->
+    <p style="font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--olive);margin-bottom:16px;margin-top:64px;" class="reveal">Product Photography</p>
+    <div class="packages-table reveal">
+      <div class="pkg-row pkg-header">
+        <div class="pkg-cell">Package</div>
+        <div class="pkg-cell">Products</div>
+        <div class="pkg-cell">Edited Images</div>
+        <div class="pkg-cell">Price (OMR)</div>
+      </div>
+      <div class="pkg-row">
+        <div class="pkg-cell"><div><div class="pkg-name">Starter</div><div class="pkg-sub">Clean background, 2 angles per product</div></div></div>
+        <div class="pkg-cell">5</div>
+        <div class="pkg-cell">12</div>
+        <div class="pkg-cell"><span class="pkg-price-val">80</span></div>
+      </div>
+      <div class="pkg-row">
+        <div class="pkg-cell"><div><div class="pkg-name">Pro <span class="pkg-badge">Popular</span></div><div class="pkg-sub">Styled backgrounds, lifestyle context, 3 angles</div></div></div>
+        <div class="pkg-cell">15</div>
+        <div class="pkg-cell">35</div>
+        <div class="pkg-cell"><span class="pkg-price-val">350</span></div>
+      </div>
+      <div class="pkg-row">
+        <div class="pkg-cell"><div><div class="pkg-name">Premium</div><div class="pkg-sub">Full creative direction, campaign-ready imagery</div></div></div>
+        <div class="pkg-cell">30</div>
+        <div class="pkg-cell">70</div>
+        <div class="pkg-cell"><span class="pkg-price-val">950</span></div>
+      </div>
+    </div>
+
+    <!-- HEADSHOTS -->
+    <p style="font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--olive);margin-bottom:16px;margin-top:48px;" class="reveal">Headshots</p>
+    <div class="packages-table reveal">
+      <div class="pkg-row pkg-header">
+        <div class="pkg-cell">Package</div>
+        <div class="pkg-cell">Session</div>
+        <div class="pkg-cell">Edited Selects</div>
+        <div class="pkg-cell">Price (OMR)</div>
+      </div>
+      <div class="pkg-row">
+        <div class="pkg-cell"><div><div class="pkg-name">Starter</div><div class="pkg-sub">1 outfit · 1 backdrop</div></div></div>
+        <div class="pkg-cell">30 min</div>
+        <div class="pkg-cell">8</div>
+        <div class="pkg-cell"><span class="pkg-price-val">90</span></div>
+      </div>
+      <div class="pkg-row">
+        <div class="pkg-cell"><div><div class="pkg-name">Pro <span class="pkg-badge">Popular</span></div><div class="pkg-sub">2 outfits · indoor + outdoor · LinkedIn crop</div></div></div>
+        <div class="pkg-cell">60 min</div>
+        <div class="pkg-cell">18</div>
+        <div class="pkg-cell"><span class="pkg-price-val">280</span></div>
+      </div>
+      <div class="pkg-row">
+        <div class="pkg-cell"><div><div class="pkg-name">Premium</div><div class="pkg-sub">3 outfits · location scouting · corporate team option</div></div></div>
+        <div class="pkg-cell">2 hrs</div>
+        <div class="pkg-cell">35</div>
+        <div class="pkg-cell"><span class="pkg-price-val">900</span></div>
+      </div>
+    </div>
+
+    <!-- PERSONAL BRANDING -->
+    <p style="font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--olive);margin-bottom:16px;margin-top:48px;" class="reveal">Personal Branding Portraits</p>
+    <div class="packages-table reveal">
+      <div class="pkg-row pkg-header">
+        <div class="pkg-cell">Package</div>
+        <div class="pkg-cell">Session</div>
+        <div class="pkg-cell">Edited Images</div>
+        <div class="pkg-cell">Price (OMR)</div>
+      </div>
+      <div class="pkg-row">
+        <div class="pkg-cell"><div><div class="pkg-name">Starter</div><div class="pkg-sub">1 location · 2 outfits · brand questionnaire</div></div></div>
+        <div class="pkg-cell">60 min</div>
+        <div class="pkg-cell">20</div>
+        <div class="pkg-cell"><span class="pkg-price-val">120</span></div>
+      </div>
+      <div class="pkg-row">
+        <div class="pkg-cell"><div><div class="pkg-name">Pro <span class="pkg-badge">Popular</span></div><div class="pkg-sub">2 locations · 3 outfits · social sizing pack · content guide</div></div></div>
+        <div class="pkg-cell">2 hrs</div>
+        <div class="pkg-cell">45</div>
+        <div class="pkg-cell"><span class="pkg-price-val">420</span></div>
+      </div>
+      <div class="pkg-row">
+        <div class="pkg-cell"><div><div class="pkg-name">Premium</div><div class="pkg-sub">Multiple locations · full creative direction · corporate identity</div></div></div>
+        <div class="pkg-cell">Half day</div>
+        <div class="pkg-cell">80</div>
+        <div class="pkg-cell"><span class="pkg-price-val">1,600</span></div>
+      </div>
+    </div>
+
+    <p class="pkg-note reveal">All prices in Omani Rial (OMR) · 50% deposit to confirm · Rush delivery available · Bundles on request</p>
+  </div>
+</section>
+
+<!-- ── PROCESS ── -->
+<section class="process" id="process">
+  <div class="process-inner">
+    <div class="section-header reveal">
+      <h2 class="section-title">The creative <em>journey</em></h2>
+      <span class="section-num">— 03</span>
+    </div>
+    <div class="steps reveal">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-title">The Discovery</div>
+        <p class="step-desc">We start with a conversation about your business, your audience, and your ambitions. I listen for what's unsaid as much as what is — because that's usually where the real story lives.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-title">The Strategy</div>
+        <p class="step-desc">Before anything is designed or created, the direction must be clear. I build the creative and strategic foundation — positioning, narrative, visual language — so every decision that follows is intentional.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-title">The Creation</div>
+        <p class="step-desc">This is where the work comes to life — whether that's a brand identity, a campaign, a photograph, a packaging concept, or an illustration. Every output is crafted with the same attention to story and detail.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-title">The Impact</div>
+        <p class="step-desc">The work is delivered — and then it works. A brand that commands attention. Imagery that converts. A visual identity that grows with your business. The goal was never a beautiful file. It was always a result.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── NEWSLETTER ── -->
+<section class="newsletter">
+  <div class="newsletter-inner reveal">
+    <span class="newsletter-eyebrow">Stay in the loop</span>
+    <h2 class="newsletter-heading">Insights on brand,<br>design &amp; <em>visual storytelling.</em></h2>
+    <p class="newsletter-sub">No noise. Occasional thoughts on creativity, branding, and building a business that looks as good as it works. Straight to your inbox.</p>
+    <form class="newsletter-form" action="https://formsubmit.co/hello@hebazituni.com" method="POST">
+      <input type="hidden" name="_subject" value="New Newsletter Subscriber — hebazituni.com">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+      <input class="newsletter-input" type="email" name="email" placeholder="Your email address" required>
+      <button class="newsletter-btn" type="submit">Subscribe</button>
+    </form>
+    <p class="newsletter-note">No spam. Unsubscribe anytime.</p>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section class="contact" id="contact">
+  <div class="contact-inner reveal">
+    <span class="contact-eyebrow">Let's Build Something</span>
+    <h2 class="contact-heading">Your story<br>deserves to be <em>seen.</em></h2>
+    <p class="contact-sub">
+      I work with small businesses across Muscat who are ready<br>
+      to show up with intention. Let's talk about yours.
+    </p>
+    <div class="contact-links">
+      <a href="mailto:hello@hebazituni.com" class="contact-link">hello@hebazituni.com</a>
+      <a href="https://wa.me/message/UQNVWTX6CAJKK1" class="contact-link">WhatsApp</a>
+      <a href="https://instagram.com/" class="contact-link">@hebazituni</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-name">Heba Zituni</div>
+  <div class="footer-note">Creative Director · Photographer · Muscat, Oman · © 2025</div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
