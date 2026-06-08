@@ -319,98 +319,109 @@ body {
   font-weight: 300;
   line-height: 1.85;
   color: rgba(216,207,188,0.5);
-  margin-bottom: 32px;
+  margin-bottom: 0;
 }
-.service-price-from {
+
+/* ── SERVICE CATEGORIES ── */
+.services-category { margin-bottom: 2px; }
+.services-category-label {
+  font-family: 'Jost', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--bone-mid);
+  background: rgba(216,207,188,0.07);
+  padding: 14px 24px;
+  border-left: 2px solid var(--bone);
+  margin-bottom: 1px;
+}
+
+/* ── NEWSLETTER ── */
+.newsletter {
+  background: var(--black);
+  padding: 100px 56px;
+  border-top: 1px solid rgba(216,207,188,0.08);
+}
+.newsletter-inner {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+}
+.newsletter-eyebrow {
   font-family: 'Jost', sans-serif;
   font-size: 10px;
   font-weight: 400;
-  letter-spacing: 0.25em;
+  letter-spacing: 0.35em;
   text-transform: uppercase;
   color: var(--bone-mid);
+  margin-bottom: 20px;
+  display: block;
 }
-.service-price {
+.newsletter-heading {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 36px;
+  font-size: clamp(32px, 4vw, 52px);
   font-weight: 300;
   color: var(--white);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin-bottom: 16px;
 }
-
-/* ── PACKAGES ── */
-.packages { background: var(--bone); padding: 120px 56px; }
-.packages-inner { max-width: 1100px; margin: 0 auto; }
-.packages .section-title { color: var(--black); }
-.packages .section-title em { color: var(--olive); }
-.packages .section-num { color: var(--olive); }
-.packages-table {
-  margin-top: 64px;
-  border: 1px solid rgba(86,84,73,0.2);
-}
-.pkg-row {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  border-bottom: 1px solid rgba(86,84,73,0.15);
-  transition: background 0.3s;
-}
-.pkg-row:last-child { border-bottom: none; }
-.pkg-row:not(.pkg-header):hover { background: rgba(255,251,244,0.6); }
-.pkg-header { background: var(--olive); }
-.pkg-cell {
-  padding: 24px 28px;
+.newsletter-heading em { font-style: italic; color: var(--bone); }
+.newsletter-sub {
   font-family: 'Jost', sans-serif;
   font-size: 13px;
   font-weight: 300;
-  color: var(--olive);
-  border-right: 1px solid rgba(86,84,73,0.15);
-  display: flex;
-  align-items: center;
+  color: rgba(216,207,188,0.55);
+  line-height: 1.8;
+  margin-bottom: 40px;
 }
-.pkg-cell:last-child { border-right: none; }
-.pkg-header .pkg-cell {
+.newsletter-form {
+  display: flex;
+  gap: 0;
+  max-width: 480px;
+  margin: 0 auto;
+}
+.newsletter-input {
+  flex: 1;
+  background: rgba(216,207,188,0.06);
+  border: 1px solid rgba(216,207,188,0.15);
+  border-right: none;
+  color: var(--white);
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  padding: 16px 20px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+.newsletter-input::placeholder { color: rgba(216,207,188,0.3); }
+.newsletter-input:focus { border-color: rgba(216,207,188,0.4); }
+.newsletter-btn {
+  background: var(--bone);
+  color: var(--black);
+  font-family: 'Jost', sans-serif;
   font-size: 10px;
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: var(--bone);
-  padding: 18px 28px;
+  border: none;
+  padding: 16px 28px;
+  cursor: pointer;
+  transition: background 0.3s;
+  white-space: nowrap;
 }
-.pkg-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 22px;
-  font-weight: 400;
-  color: var(--black);
-  margin-bottom: 4px;
-}
-.pkg-sub { font-size: 12px; color: rgba(86,84,73,0.6); }
-.pkg-price-val {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 28px;
+.newsletter-btn:hover { background: var(--white); }
+.newsletter-note {
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
   font-weight: 300;
-  color: var(--black);
-}
-.pkg-badge {
-  display: inline-block;
-  background: var(--black);
-  color: var(--bone);
-  font-family: 'Jost', sans-serif;
-  font-size: 9px;
-  font-weight: 500;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  padding: 4px 10px;
-  margin-left: 10px;
-  vertical-align: middle;
-}
-.pkg-note {
-  margin-top: 18px;
-  font-family: 'Jost', sans-serif;
-  font-size: 12px;
-  color: var(--olive);
-  opacity: 0.6;
+  color: rgba(216,207,188,0.3);
+  margin-top: 16px;
   letter-spacing: 0.05em;
 }
 
-/* ── PROCESS ── */
+/* ── SERVICE CARD — remove price styles no longer needed ── */
 .process { background: var(--white); padding: 120px 56px; }
 .process-inner { max-width: 1100px; margin: 0 auto; }
 .process .section-title { color: var(--black); }
@@ -593,19 +604,25 @@ footer {
 <!-- ── MARQUEE ── -->
 <div class="marquee-wrap">
   <div class="marquee-track">
+    <span class="marquee-item">Brand Strategy</span><span class="marquee-dot">·</span>
     <span class="marquee-item">Creative Direction</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Branding</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Photography</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Packaging Design</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Marketing Strategy</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Illustration</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Creative Design</span><span class="marquee-dot">·</span>
     <span class="marquee-item">Visual Storytelling</span><span class="marquee-dot">·</span>
-    <span class="marquee-item">Product Photography</span><span class="marquee-dot">·</span>
-    <span class="marquee-item">Brand Identity</span><span class="marquee-dot">·</span>
-    <span class="marquee-item">Personal Branding</span><span class="marquee-dot">·</span>
-    <span class="marquee-item">Art &amp; Design</span><span class="marquee-dot">·</span>
     <span class="marquee-item">13 Years Experience</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Brand Strategy</span><span class="marquee-dot">·</span>
     <span class="marquee-item">Creative Direction</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Branding</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Photography</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Packaging Design</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Marketing Strategy</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Illustration</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Creative Design</span><span class="marquee-dot">·</span>
     <span class="marquee-item">Visual Storytelling</span><span class="marquee-dot">·</span>
-    <span class="marquee-item">Product Photography</span><span class="marquee-dot">·</span>
-    <span class="marquee-item">Brand Identity</span><span class="marquee-dot">·</span>
-    <span class="marquee-item">Personal Branding</span><span class="marquee-dot">·</span>
-    <span class="marquee-item">Art &amp; Design</span><span class="marquee-dot">·</span>
     <span class="marquee-item">13 Years Experience</span><span class="marquee-dot">·</span>
   </div>
 </div>
@@ -642,131 +659,76 @@ footer {
 <section class="services" id="services">
   <div class="services-inner">
     <div class="section-header reveal">
-      <h2 class="section-title">What I <em>create</em></h2>
+      <h2 class="section-title">What I <em>offer</em></h2>
       <span class="section-num">— 01</span>
     </div>
-    <div class="services-grid reveal">
-      <div class="service-card">
-        <span class="service-icon">📦</span>
-        <div class="service-name">Product Photography</div>
-        <p class="service-desc">Clean, styled, and story-driven product imagery built for e-commerce, menus, and social. Every frame is composed to sell — not just to show.</p>
-        <div class="service-price-from">From</div>
-        <div class="service-price">OMR 80</div>
-      </div>
-      <div class="service-card">
-        <span class="service-icon">🎯</span>
-        <div class="service-name">Headshots</div>
-        <p class="service-desc">Portraits that communicate authority and trust. Directed, not just snapped — so the person in the frame looks like the professional they are.</p>
-        <div class="service-price-from">From</div>
-        <div class="service-price">OMR 90</div>
-      </div>
-      <div class="service-card">
-        <span class="service-icon">🌟</span>
-        <div class="service-name">Personal Branding</div>
-        <p class="service-desc">A full visual identity session — locations, styling, direction, narrative. For founders and creatives who are ready to own their story publicly.</p>
-        <div class="service-price-from">From</div>
-        <div class="service-price">OMR 120</div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- ── PACKAGES ── -->
-<section class="packages" id="packages">
-  <div class="packages-inner">
-    <div class="section-header reveal">
-      <h2 class="section-title">Simple, honest <em>pricing</em></h2>
-      <span class="section-num">— 02</span>
-    </div>
-
-    <!-- PRODUCT PHOTOGRAPHY -->
-    <p style="font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--olive);margin-bottom:16px;margin-top:64px;" class="reveal">Product Photography</p>
-    <div class="packages-table reveal">
-      <div class="pkg-row pkg-header">
-        <div class="pkg-cell">Package</div>
-        <div class="pkg-cell">Products</div>
-        <div class="pkg-cell">Edited Images</div>
-        <div class="pkg-cell">Price (OMR)</div>
-      </div>
-      <div class="pkg-row">
-        <div class="pkg-cell"><div><div class="pkg-name">Starter</div><div class="pkg-sub">Clean background, 2 angles per product</div></div></div>
-        <div class="pkg-cell">5</div>
-        <div class="pkg-cell">12</div>
-        <div class="pkg-cell"><span class="pkg-price-val">80</span></div>
-      </div>
-      <div class="pkg-row">
-        <div class="pkg-cell"><div><div class="pkg-name">Pro <span class="pkg-badge">Popular</span></div><div class="pkg-sub">Styled backgrounds, lifestyle context, 3 angles</div></div></div>
-        <div class="pkg-cell">15</div>
-        <div class="pkg-cell">35</div>
-        <div class="pkg-cell"><span class="pkg-price-val">350</span></div>
-      </div>
-      <div class="pkg-row">
-        <div class="pkg-cell"><div><div class="pkg-name">Premium</div><div class="pkg-sub">Full creative direction, campaign-ready imagery</div></div></div>
-        <div class="pkg-cell">30</div>
-        <div class="pkg-cell">70</div>
-        <div class="pkg-cell"><span class="pkg-price-val">950</span></div>
+    <!-- CATEGORY 01 -->
+    <div class="services-category reveal">
+      <div class="services-category-label">Creative Direction &amp; Strategy</div>
+      <div class="services-grid">
+        <div class="service-card">
+          <span class="service-icon">◈</span>
+          <div class="service-name">Brand Strategy</div>
+          <p class="service-desc">Before any visual is created, the story must be clear. I work with you to define your brand's positioning, voice, audience, and direction — the foundation everything else is built on.</p>
+        </div>
+        <div class="service-card">
+          <span class="service-icon">◉</span>
+          <div class="service-name">Branding</div>
+          <p class="service-desc">A complete visual identity — logo, typography, color system, brand guidelines. Built to be distinctive, consistent, and true to who you are. Not a template. A brand.</p>
+        </div>
+        <div class="service-card">
+          <span class="service-icon">◎</span>
+          <div class="service-name">Marketing Strategy &amp; Plans</div>
+          <p class="service-desc">Strategic marketing direction tailored to your business — from go-to-market plans to content strategies and campaign frameworks that connect with your audience and drive results.</p>
+        </div>
       </div>
     </div>
 
-    <!-- HEADSHOTS -->
-    <p style="font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--olive);margin-bottom:16px;margin-top:48px;" class="reveal">Headshots</p>
-    <div class="packages-table reveal">
-      <div class="pkg-row pkg-header">
-        <div class="pkg-cell">Package</div>
-        <div class="pkg-cell">Session</div>
-        <div class="pkg-cell">Edited Selects</div>
-        <div class="pkg-cell">Price (OMR)</div>
-      </div>
-      <div class="pkg-row">
-        <div class="pkg-cell"><div><div class="pkg-name">Starter</div><div class="pkg-sub">1 outfit · 1 backdrop</div></div></div>
-        <div class="pkg-cell">30 min</div>
-        <div class="pkg-cell">8</div>
-        <div class="pkg-cell"><span class="pkg-price-val">90</span></div>
-      </div>
-      <div class="pkg-row">
-        <div class="pkg-cell"><div><div class="pkg-name">Pro <span class="pkg-badge">Popular</span></div><div class="pkg-sub">2 outfits · indoor + outdoor · LinkedIn crop</div></div></div>
-        <div class="pkg-cell">60 min</div>
-        <div class="pkg-cell">18</div>
-        <div class="pkg-cell"><span class="pkg-price-val">280</span></div>
-      </div>
-      <div class="pkg-row">
-        <div class="pkg-cell"><div><div class="pkg-name">Premium</div><div class="pkg-sub">3 outfits · location scouting · corporate team option</div></div></div>
-        <div class="pkg-cell">2 hrs</div>
-        <div class="pkg-cell">35</div>
-        <div class="pkg-cell"><span class="pkg-price-val">900</span></div>
+    <!-- CATEGORY 02 -->
+    <div class="services-category reveal" style="margin-top:2px;">
+      <div class="services-category-label">Design &amp; Art</div>
+      <div class="services-grid">
+        <div class="service-card">
+          <span class="service-icon">▣</span>
+          <div class="service-name">Creative Design</div>
+          <p class="service-desc">From social media assets to print collateral, campaign visuals to brand touchpoints — every piece of design is intentional, on-brand, and built to communicate clearly.</p>
+        </div>
+        <div class="service-card">
+          <span class="service-icon">⬡</span>
+          <div class="service-name">Packaging Custom Design</div>
+          <p class="service-desc">Packaging is the first physical experience of your brand. I design custom packaging that makes a product feel premium before it's even opened — structure, material, and storytelling in one.</p>
+        </div>
+        <div class="service-card">
+          <span class="service-icon">✦</span>
+          <div class="service-name">Illustration &amp; Creative Concepts</div>
+          <p class="service-desc">Original illustration and conceptual art that gives brands a unique visual language. Hand-crafted, distinctive, and impossible to replicate — because it's created specifically for you.</p>
+        </div>
       </div>
     </div>
 
-    <!-- PERSONAL BRANDING -->
-    <p style="font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--olive);margin-bottom:16px;margin-top:48px;" class="reveal">Personal Branding</p>
-    <div class="packages-table reveal">
-      <div class="pkg-row pkg-header">
-        <div class="pkg-cell">Package</div>
-        <div class="pkg-cell">Session</div>
-        <div class="pkg-cell">Edited Images</div>
-        <div class="pkg-cell">Price (OMR)</div>
-      </div>
-      <div class="pkg-row">
-        <div class="pkg-cell"><div><div class="pkg-name">Starter</div><div class="pkg-sub">1 location · 2 outfits · brand questionnaire</div></div></div>
-        <div class="pkg-cell">60 min</div>
-        <div class="pkg-cell">20</div>
-        <div class="pkg-cell"><span class="pkg-price-val">120</span></div>
-      </div>
-      <div class="pkg-row">
-        <div class="pkg-cell"><div><div class="pkg-name">Pro <span class="pkg-badge">Popular</span></div><div class="pkg-sub">2 locations · 3 outfits · social sizing pack · content guide</div></div></div>
-        <div class="pkg-cell">2 hrs</div>
-        <div class="pkg-cell">45</div>
-        <div class="pkg-cell"><span class="pkg-price-val">420</span></div>
-      </div>
-      <div class="pkg-row">
-        <div class="pkg-cell"><div><div class="pkg-name">Premium</div><div class="pkg-sub">Multiple locations · full creative direction · corporate identity</div></div></div>
-        <div class="pkg-cell">Half day</div>
-        <div class="pkg-cell">80</div>
-        <div class="pkg-cell"><span class="pkg-price-val">1,600</span></div>
+    <!-- CATEGORY 03 -->
+    <div class="services-category reveal" style="margin-top:2px;">
+      <div class="services-category-label">Photography</div>
+      <div class="services-grid">
+        <div class="service-card">
+          <span class="service-icon">◫</span>
+          <div class="service-name">Product Photography</div>
+          <p class="service-desc">Clean, styled, and story-driven product imagery built for e-commerce, menus, and social. Every frame is composed to sell — not just to show.</p>
+        </div>
+        <div class="service-card">
+          <span class="service-icon">◷</span>
+          <div class="service-name">Headshots</div>
+          <p class="service-desc">Portraits that communicate authority and trust. Directed, not just snapped — so the person in the frame looks like the professional they are.</p>
+        </div>
+        <div class="service-card">
+          <span class="service-icon">◈</span>
+          <div class="service-name">Personal Branding Portraits</div>
+          <p class="service-desc">A full visual identity session — locations, styling, direction, narrative. For founders and creatives who are ready to own their story publicly.</p>
+        </div>
       </div>
     </div>
 
-    <p class="pkg-note reveal">All prices in Omani Rial (OMR) · 50% deposit to confirm · Rush delivery available · Bundles on request</p>
   </div>
 </section>
 
@@ -774,31 +736,48 @@ footer {
 <section class="process" id="process">
   <div class="process-inner">
     <div class="section-header reveal">
-      <h2 class="section-title">How the <em>story</em> unfolds</h2>
-      <span class="section-num">— 03</span>
+      <h2 class="section-title">The creative <em>journey</em></h2>
+      <span class="section-num">— 02</span>
     </div>
     <div class="steps reveal">
       <div class="step">
         <div class="step-num">01</div>
-        <div class="step-title">The Brief</div>
-        <p class="step-desc">We start with a conversation — not a form. I want to understand your business, your audience, and the story your brand needs to tell.</p>
+        <div class="step-title">The Discovery</div>
+        <p class="step-desc">We start with a conversation about your business, your audience, and your ambitions. I listen for what's unsaid as much as what is — because that's usually where the real story lives.</p>
       </div>
       <div class="step">
         <div class="step-num">02</div>
-        <div class="step-title">The Vision</div>
-        <p class="step-desc">I build a creative direction: locations, mood, styling, and narrative arc. You see the plan before we shoot a single frame.</p>
+        <div class="step-title">The Strategy</div>
+        <p class="step-desc">Before anything is designed or created, the direction must be clear. I build the creative and strategic foundation — positioning, narrative, visual language — so every decision that follows is intentional.</p>
       </div>
       <div class="step">
         <div class="step-num">03</div>
-        <div class="step-title">The Shoot</div>
-        <p class="step-desc">A directed, intentional session where I handle the creative so you can be present. Every frame has a purpose.</p>
+        <div class="step-title">The Creation</div>
+        <p class="step-desc">This is where the work comes to life — whether that's a brand identity, a campaign, a photograph, a packaging concept, or an illustration. Every output is crafted with the same attention to story and detail.</p>
       </div>
       <div class="step">
         <div class="step-num">04</div>
-        <div class="step-title">The Delivery</div>
-        <p class="step-desc">Edited images via private gallery within 3–5 days. Web-ready and print-ready. A visual identity you can use immediately.</p>
+        <div class="step-title">The Impact</div>
+        <p class="step-desc">The work is delivered — and then it works. A brand that commands attention. Imagery that converts. A visual identity that grows with your business. The goal was never a beautiful file. It was always a result.</p>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ── NEWSLETTER ── -->
+<section class="newsletter">
+  <div class="newsletter-inner reveal">
+    <span class="newsletter-eyebrow">Stay in the loop</span>
+    <h2 class="newsletter-heading">Insights on brand,<br>design &amp; <em>visual storytelling.</em></h2>
+    <p class="newsletter-sub">No noise. Occasional thoughts on creativity, branding, and building a business that looks as good as it works. Straight to your inbox.</p>
+    <form class="newsletter-form" action="https://formsubmit.co/hello@hebazituni.com" method="POST">
+      <input type="hidden" name="_subject" value="New Newsletter Subscriber — hebazituni.com">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+      <input class="newsletter-input" type="email" name="email" placeholder="Your email address" required>
+      <button class="newsletter-btn" type="submit">Subscribe</button>
+    </form>
+    <p class="newsletter-note">No spam. Unsubscribe anytime.</p>
   </div>
 </section>
 
