@@ -32,12 +32,13 @@ export const introSchema = z.object({
   accent: zColor(),
   /**
    * dark        - the design as approved: near-black ground and dot grid.
+   * olive       - the same, on a dark olive green ground.
    * transparent - ground and grid dropped, so the cards composite straight
    *               over your own footage.
    * green       - the same overlay on chroma green, for editors whose alpha
    *               support is unreliable (CapCut among them).
    */
-  ground: z.enum(["dark", "transparent", "green"]),
+  ground: z.enum(["dark", "olive", "transparent", "green"]),
 });
 
 export type IntroProps = z.infer<typeof introSchema>;
@@ -156,12 +157,22 @@ export const Intro: React.FC<IntroProps> = ({
             height: STAGE_H,
             left: (width - STAGE_W) / 2,
             top: (height - STAGE_H) / 2,
-            backgroundColor: ground === "dark" ? P.ground : "transparent",
+            backgroundColor:
+              ground === "dark"
+                ? P.ground
+                : ground === "olive"
+                  ? P.groundOlive
+                  : "transparent",
             overflow: "hidden",
           }}
         >
-          {ground === "dark" ? (
-            <DotGrid w={STAGE_W} h={STAGE_H} opacity={gridIn * 0.9} />
+          {ground === "dark" || ground === "olive" ? (
+            <DotGrid
+              w={STAGE_W}
+              h={STAGE_H}
+              dot={ground === "olive" ? P.gridDotOlive : P.gridDot}
+              opacity={gridIn * 0.9}
+            />
           ) : null}
 
           {/* Hero card */}

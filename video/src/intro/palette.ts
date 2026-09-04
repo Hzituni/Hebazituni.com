@@ -5,6 +5,9 @@
  */
 export const P = {
   ground: "#0B0C08",
+  /** Dark olive ground: the site's olive taken right down in value. */
+  groundOlive: "#1E2318",
+  gridDotOlive: "#414734",
   gridDot: "#3C3E31",
 
   clay: "#C4562A",

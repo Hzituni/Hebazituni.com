@@ -23,6 +23,16 @@ export const RemotionRoot: React.FC = () => {
         height={1920}
       />
       <Composition
+        id="Intro-Vertical-Olive"
+        component={Intro}
+        schema={introSchema}
+        defaultProps={{ ...introDefaults, ground: "olive" as const }}
+        durationInFrames={150}
+        fps={FPS}
+        width={1080}
+        height={1920}
+      />
+      <Composition
         id="Intro-Vertical-Overlay"
         component={Intro}
         schema={introSchema}

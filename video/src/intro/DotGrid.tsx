@@ -7,11 +7,12 @@ export const DotGrid: React.FC<{
   readonly h: number;
   readonly gap?: number;
   readonly opacity?: number;
-}> = ({ w, h, gap = 38, opacity = 1 }) => (
+  readonly dot?: string;
+}> = ({ w, h, gap = 38, opacity = 1, dot = P.gridDot }) => (
   <svg width={w} height={h} style={{ position: "absolute", inset: 0 }} opacity={opacity}>
     <defs>
       <pattern id="dots" width={gap} height={gap} patternUnits="userSpaceOnUse">
-        <circle cx={gap / 2} cy={gap / 2} r="2.1" fill={P.gridDot} />
+        <circle cx={gap / 2} cy={gap / 2} r="2.1" fill={dot} />
       </pattern>
       <radialGradient id="dotFade" cx="50%" cy="46%" r="62%">
         <stop offset="0%" stopColor="#fff" stopOpacity="1" />
