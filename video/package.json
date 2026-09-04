@@ -6,10 +6,22 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
+    "@remotion/animation-utils": "4.0.520",
+    "@remotion/captions": "4.0.520",
     "@remotion/cli": "4.0.520",
+    "@remotion/fonts": "4.0.520",
+    "@remotion/google-fonts": "4.0.520",
+    "@remotion/media-utils": "4.0.520",
+    "@remotion/motion-blur": "4.0.520",
+    "@remotion/noise": "4.0.520",
+    "@remotion/paths": "4.0.520",
+    "@remotion/shapes": "4.0.520",
+    "@remotion/transitions": "4.0.520",
+    "@remotion/zod-types": "4.0.520",
     "react": "19.2.3",
     "react-dom": "19.2.3",
-    "remotion": "4.0.520"
+    "remotion": "4.0.520",
+    "zod": "4.4.3"
   },
   "devDependencies": {
     "@remotion/eslint-config-flat": "4.0.520",

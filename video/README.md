@@ -37,6 +37,47 @@ npx remotion render
 npx remotion upgrade
 ```
 
+## Project setup notes
+
+### Typography
+
+The site's two typefaces are **self-hosted** in `public/fonts` (latin subset,
+variable) and loaded through `src/fonts.ts`:
+
+```tsx
+import { JOST, CORMORANT } from "./fonts";
+
+<div style={{ fontFamily: JOST }}>...</div>
+```
+
+Renders deliberately do not fetch fonts from Google's CDN. A render pulling
+fonts over the network is one outage, proxy, or TLS mismatch away from
+failing halfway through, and self-hosting keeps output identical on every
+machine. `@remotion/google-fonts` is installed too and is fine for local
+experimentation, but anything committed should go through `src/fonts.ts`.
+
+To add a weight or another family, drop the `.woff2` into `public/fonts` and
+add a `loadFont` call to `src/fonts.ts`.
+
+### Chrome for rendering
+
+Remotion downloads its own Chrome Headless Shell on first render. Where that
+download is unavailable (locked-down CI, sandboxes), `remotion.config.ts`
+falls back to a Chromium already on the machine. Point it anywhere with:
+
+```console
+REMOTION_BROWSER_EXECUTABLE=/path/to/chrome npx remotion render
+```
+
+On a normal machine this does nothing and Remotion downloads Chrome as usual.
+
+### Installed packages
+
+Beyond the Remotion core: `transitions`, `shapes`, `paths`, `noise`,
+`motion-blur`, `animation-utils` (motion), `captions` (subtitles),
+`media-utils` (audio waveforms, media metadata), `fonts` + `google-fonts`
+(typography), and `zod-types` + `zod` (typed props editable in Studio).
+
 ## Docs
 
 Get started with Remotion by reading the [fundamentals page](https://www.remotion.dev/docs/the-fundamentals).
