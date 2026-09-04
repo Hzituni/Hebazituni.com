@@ -6,8 +6,9 @@ import { cancelRender, continueRender, delayRender, staticFile } from "remotion"
  * at render time. Renders stay hermetic: no network round-trip per frame, no
  * CDN outage or TLS surprise mid-render, and identical output on any machine.
  *
- * Both files are the "latin" subset as variable fonts, so a single file covers
- * the whole weight range declared below.
+ * The files are "latin" subsets as variable fonts, so a single file covers the
+ * whole weight range declared below. Cormorant ships a separate italic file --
+ * the site sets the surname in italic, so both faces are loaded.
  */
 export const JOST = "Jost";
 export const CORMORANT = "Cormorant Garamond";
@@ -27,6 +28,14 @@ Promise.all([
     url: staticFile("fonts/CormorantGaramond-latin.woff2"),
     format: "woff2",
     weight: "300 700",
+    display: "block",
+  }),
+  loadFont({
+    family: CORMORANT,
+    url: staticFile("fonts/CormorantGaramond-italic-latin.woff2"),
+    format: "woff2",
+    weight: "300 700",
+    style: "italic",
     display: "block",
   }),
 ])

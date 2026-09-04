@@ -71,6 +71,25 @@ REMOTION_BROWSER_EXECUTABLE=/path/to/chrome npx remotion render
 
 On a normal machine this does nothing and Remotion downloads Chrome as usual.
 
+### Compositions
+
+`src/TitleCard.tsx` is one component registered three times in `src/Root.tsx`,
+so the same edit ships to every platform:
+
+| Composition | Size | For |
+| --- | --- | --- |
+| `TitleCard-Landscape` | 1920x1080 | YouTube |
+| `TitleCard-Vertical` | 1080x1920 | Reels, Shorts, Stories, TikTok |
+| `TitleCard-Square` | 1080x1080 | Feed posts |
+
+```console
+npx remotion render TitleCard-Vertical out/reel.mp4
+```
+
+Copy and colours are a zod schema, so they are editable as form fields in
+Studio without touching code. Type scales off the frame's short edge, and the
+eyebrow line breaks on its separators, so no ratio wraps mid-phrase.
+
 ### Installed packages
 
 Beyond the Remotion core: `transitions`, `shapes`, `paths`, `noise`,
