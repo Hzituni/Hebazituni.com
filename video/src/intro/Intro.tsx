@@ -1,15 +1,17 @@
 import { zColor } from "@remotion/zod-types";
 import {
   AbsoluteFill,
+  Img,
   interpolate,
   spring,
+  staticFile,
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
 import { z } from "zod";
 import { JOST, PLAYFAIR } from "../fonts";
 import { Backdrop } from "./Backdrop";
-import { Ampersand, Card, Equalizer, Viewfinder } from "./Card";
+import { Card, EditTimeline, Equalizer, Viewfinder } from "./Card";
 import { DotGrid } from "./DotGrid";
 import { P } from "./palette";
 import { Silhouette } from "./Silhouette";
@@ -23,6 +25,8 @@ export const introSchema = z.object({
   firstName: z.string(),
   lastName: z.string(),
   wordmark: z.string(),
+  /** File in public/, e.g. "hero.jpg". Empty falls back to the drawn wall. */
+  heroImage: z.string(),
   cardOne: z.string(),
   cardTwo: z.string(),
   cardThree: z.string(),
@@ -35,6 +39,7 @@ export const introDefaults: IntroProps = {
   firstName: "HEBA",
   lastName: "ZITUNI",
   wordmark: "HEBAZITUNI.COM",
+  heroImage: "",
   cardOne: "Creative",
   cardTwo: "Cinematic",
   cardThree: "Bold",
@@ -45,6 +50,7 @@ export const Intro: React.FC<IntroProps> = ({
   firstName,
   lastName,
   wordmark,
+  heroImage,
   cardOne,
   cardTwo,
   cardThree,
@@ -155,7 +161,20 @@ export const Intro: React.FC<IntroProps> = ({
               ...layer(hero, float(9, 150, 0)),
             }}
           >
-            <Backdrop w={HERO.w} h={HERO.h} />
+            {heroImage ? (
+              <Img
+                src={staticFile(heroImage)}
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                }}
+              />
+            ) : (
+              <Backdrop w={HERO.w} h={HERO.h} />
+            )}
 
             <div
               style={{
@@ -228,7 +247,7 @@ export const Intro: React.FC<IntroProps> = ({
             style={{ position: "absolute", left: 55, top: 790, ...layer(cB, float(14, 165, 2.4), 4) }}
           >
             <Card label={cardOne} variant="frosted" w={345} h={255}>
-              <Ampersand />
+              <EditTimeline />
             </Card>
           </div>
 
@@ -244,11 +263,11 @@ export const Intro: React.FC<IntroProps> = ({
           <div
             style={{
               position: "absolute",
-              left: 145,
-              top: 565,
-              width: 96,
-              height: 96,
-              borderRadius: 48,
+              left: 132,
+              top: 552,
+              width: 122,
+              height: 122,
+              borderRadius: 61,
               background: "rgba(232,224,210,0.12)",
               border: "1px solid rgba(255,251,244,0.22)",
               backdropFilter: "blur(14px)",
@@ -262,7 +281,7 @@ export const Intro: React.FC<IntroProps> = ({
               style={{
                 fontFamily: PLAYFAIR,
                 fontStyle: "italic",
-                fontSize: 38,
+                fontSize: 48,
                 color: P.bone,
               }}
             >

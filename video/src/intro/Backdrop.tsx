@@ -1,11 +1,16 @@
 import { P } from "./palette";
 
 /**
- * The terracotta wall behind the figure: a sunlit render wall with olive
- * branch shadows raking across it. Generated rather than photographed, so it
- * carries no licence and every value stays tunable. Geometry is derived from
- * a fixed seed at module scope, so every frame and every render thread draws
- * exactly the same wall.
+ * Stand-in for the terracotta wall: a sunlit render wall with olive branches
+ * across it, echoing the reference photograph's composition -- shadowed wedge
+ * in the top-left corner, hard diagonal light break, foliage entering from
+ * the left, cast shadows falling away to the lower left.
+ *
+ * This is drawn, not photographed. Supply `heroImage` on the composition to
+ * replace it with a real picture; nothing else in the layout changes.
+ *
+ * Geometry comes from a fixed seed at module scope, so every frame and every
+ * render thread draws exactly the same wall.
  */
 const mulberry32 = (seed: number) => () => {
   seed |= 0;
@@ -15,79 +20,107 @@ const mulberry32 = (seed: number) => () => {
   return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
 };
 
-type Leaf = { x: number; y: number; rx: number; ry: number; rot: number };
+type Leaf = { x: number; y: number; rx: number; ry: number; rot: number; tone: number };
 type Branch = { d: string; leaves: Leaf[] };
 
-const buildBranches = (): Branch[] => {
-  const rand = mulberry32(20260904);
-  const branches: Branch[] = [];
-
-  // Three sprigs raking down-right, as a low sun would throw them.
-  const starts = [
-    { x: -40, y: 120, len: 520, drop: 300 },
-    { x: 40, y: 380, len: 460, drop: 240 },
-    { x: -60, y: 640, len: 400, drop: 190 },
-  ];
-
-  for (const s of starts) {
+// Unit-space (0..1) sprigs, scaled to the card at draw time.
+const buildBranches = (seed: number, specs: { x: number; y: number; len: number; drop: number }[]) => {
+  const rand = mulberry32(seed);
+  const out: Branch[] = [];
+  for (const s of specs) {
     const endX = s.x + s.len;
     const endY = s.y + s.drop;
-    const d = `M ${s.x} ${s.y} C ${s.x + s.len * 0.4} ${s.y + s.drop * 0.1}, ${
-      s.x + s.len * 0.7
-    } ${s.y + s.drop * 0.5}, ${endX} ${endY}`;
+    const d = `M ${s.x} ${s.y} C ${s.x + s.len * 0.42} ${s.y + s.drop * 0.08}, ${
+      s.x + s.len * 0.74
+    } ${s.y + s.drop * 0.48}, ${endX} ${endY}`;
 
     const leaves: Leaf[] = [];
-    const count = 10;
+    const count = 14;
     for (let i = 0; i < count; i++) {
       const t = (i + 1) / (count + 1);
-      // Point on the sprig, approximated along the same curve.
       const bx = s.x + s.len * t;
-      const by = s.y + s.drop * (t * t * 0.85 + t * 0.15);
+      const by = s.y + s.drop * (t * t * 0.8 + t * 0.2);
       const side = i % 2 === 0 ? -1 : 1;
-      const spread = 34 + rand() * 40;
+      const spread = 0.028 + rand() * 0.034;
       leaves.push({
-        x: bx + side * spread * 0.35,
+        x: bx + side * spread * 0.3,
         y: by + side * spread,
-        rx: 27 + rand() * 17,
-        ry: 12 + rand() * 6,
-        rot: -28 + side * 34 + rand() * 26,
+        // Olive leaves are long and narrow -- roughly four to one.
+        rx: 0.036 + rand() * 0.026,
+        ry: 0.009 + rand() * 0.005,
+        rot: -24 + side * 30 + rand() * 24,
+        tone: rand(),
       });
     }
-    branches.push({ d, leaves });
+    out.push({ d, leaves });
   }
-  return branches;
+  return out;
 };
 
-const BRANCHES = buildBranches();
+// Foliage catching the light, entering from the left as in the photograph.
+const LIT = buildBranches(20260904, [
+  { x: -0.06, y: 0.2, len: 0.78, drop: 0.2 },
+  { x: -0.1, y: 0.46, len: 0.7, drop: 0.16 },
+]);
+
+// The same foliage thrown onto the wall, longer and softer.
+const CAST = buildBranches(77712, [
+  { x: 0.1, y: 0.08, len: 0.86, drop: 0.3 },
+  { x: -0.04, y: 0.42, len: 0.8, drop: 0.26 },
+]);
+
+const LEAF_TONES = ["#7E8C5E", "#63714A", "#4A5836", "#8E9A6E"];
+
+const leafPath = (rx: number, ry: number) =>
+  `M ${-rx} 0 Q 0 ${-ry}, ${rx} 0 Q 0 ${ry}, ${-rx} 0 Z`;
 
 export const Backdrop: React.FC<{ readonly w: number; readonly h: number }> = ({ w, h }) => {
+  const sx = (v: number) => v * w;
+  const sy = (v: number) => v * h;
+
+  const branchGroup = (
+    branches: Branch[],
+    stroke: string,
+    fill: (l: Leaf) => string,
+    strokeW: number,
+  ) =>
+    branches.map((b, i) => {
+      // Re-express the unit-space curve in card pixels.
+      const nums = b.d.match(/-?\d*\.?\d+/g)!.map(Number);
+      const px = nums.map((n, k) => (k % 2 === 0 ? sx(n) : sy(n)));
+      const d = `M ${px[0]} ${px[1]} C ${px[2]} ${px[3]}, ${px[4]} ${px[5]}, ${px[6]} ${px[7]}`;
+      return (
+        <g key={i}>
+          <path d={d} stroke={stroke} strokeWidth={strokeW} fill="none" strokeLinecap="round" />
+          {b.leaves.map((l, j) => (
+            <path
+              key={j}
+              d={leafPath(sx(l.rx), sy(l.ry))}
+              fill={fill(l)}
+              transform={`translate(${sx(l.x)} ${sy(l.y)}) rotate(${l.rot})`}
+            />
+          ))}
+        </g>
+      );
+    });
+
   return (
-    <svg
-      width={w}
-      height={h}
-      viewBox={`0 0 ${w} ${h}`}
-      style={{ position: "absolute", inset: 0 }}
-    >
+    <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} style={{ position: "absolute", inset: 0 }}>
       <defs>
-        <linearGradient id="wall" x1="0" y1="0" x2="0.6" y2="1">
+        <linearGradient id="wall" x1="0" y1="0" x2="0.55" y2="1">
           <stop offset="0%" stopColor={P.clayLit} />
-          <stop offset="46%" stopColor={P.clay} />
+          <stop offset="52%" stopColor={P.clay} />
           <stop offset="100%" stopColor={P.clayDeep} />
         </linearGradient>
-
-        {/* The hard diagonal edge where direct sun stops. */}
-        <linearGradient id="sun" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#FF9A5E" stopOpacity="0.55" />
-          <stop offset="100%" stopColor="#FF9A5E" stopOpacity="0" />
-        </linearGradient>
-
         <linearGradient id="foot" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor={P.clayShadow} stopOpacity="0" />
-          <stop offset="100%" stopColor={P.clayShadow} stopOpacity="0.85" />
+          <stop offset="100%" stopColor={P.clayShadow} stopOpacity="0.8" />
         </linearGradient>
-
+        <filter id="edge" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="3" />
+        </filter>
         <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
-          <feGaussianBlur stdDeviation="6.5" />
+          <feGaussianBlur stdDeviation="9" />
         </filter>
         <filter id="grain">
           <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" />
@@ -97,29 +130,28 @@ export const Backdrop: React.FC<{ readonly w: number; readonly h: number }> = ({
 
       <rect width={w} height={h} fill="url(#wall)" />
 
-      {/* Sunlit wedge across the upper wall. */}
-      <polygon points={`0,0 ${w},0 ${w},${h * 0.34} 0,${h * 0.62}`} fill="url(#sun)" />
+      {/* Shadowed wedge in the top-left, with the hard diagonal break. */}
+      <polygon
+        points={`0,0 ${w * 0.66},0 0,${h * 0.46}`}
+        fill={P.clayShadow}
+        opacity="0.5"
+        filter="url(#edge)"
+      />
 
-      <g filter="url(#soft)" opacity="0.36">
-        {BRANCHES.map((b, i) => (
-          <g key={i} fill={P.clayShadow} stroke={P.clayShadow}>
-            <path d={b.d} strokeWidth="3" fill="none" />
-            {b.leaves.map((l, j) => (
-              <path
-                key={j}
-                // A pointed lens, not an ellipse -- olive leaves have tips.
-                d={`M ${-l.rx} 0 Q 0 ${-l.ry}, ${l.rx} 0 Q 0 ${l.ry}, ${-l.rx} 0 Z`}
-                transform={`translate(${l.x} ${l.y}) rotate(${l.rot})`}
-              />
-            ))}
-          </g>
-        ))}
+      {/* Cast shadows first, then the foliage that throws them. */}
+      <g filter="url(#soft)" opacity="0.34">
+        {branchGroup(CAST, P.clayShadow, () => P.clayShadow, 4)}
+      </g>
+      <g>
+        {branchGroup(
+          LIT,
+          "#4A5233",
+          (l) => LEAF_TONES[Math.floor(l.tone * LEAF_TONES.length)],
+          3.5,
+        )}
       </g>
 
-      {/* Weight at the base, so the figure has something to stand against. */}
       <rect y={h * 0.55} width={w} height={h * 0.45} fill="url(#foot)" />
-
-      {/* Wall tooth. */}
       <rect width={w} height={h} filter="url(#grain)" opacity="0.07" />
     </svg>
   );

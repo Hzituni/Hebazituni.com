@@ -1,5 +1,5 @@
 import { useCurrentFrame } from "remotion";
-import { JOST, PLAYFAIR } from "../fonts";
+import { JOST } from "../fonts";
 import { P } from "./palette";
 
 export type Variant = "frosted" | "paper" | "orange";
@@ -73,27 +73,36 @@ export const Card: React.FC<{
   );
 };
 
-/** Creative: a single elegant glyph, the way the reference used one kanji. */
-export const Ampersand: React.FC = () => (
-  <span
-    style={{
-      fontFamily: PLAYFAIR,
-      fontStyle: "italic",
-      fontWeight: 500,
-      fontSize: 128,
-      lineHeight: 1,
-      color: P.white,
-    }}
-  >
-    &amp;
-  </span>
-);
+/** Creative: an edit timeline -- clips on two tracks under a playhead. Reads
+ *  as video editing at a glance and stays distinct from the viewfinder. */
+export const EditTimeline: React.FC = () => {
+  const w = 176;
+  const h = 96;
+  const clip = (x: number, y: number, cw: number, o: number) => (
+    <rect x={x} y={y} width={cw} height={22} rx={5} fill={P.white} opacity={o} />
+  );
+  return (
+    <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`}>
+      {clip(0, 14, 62, 0.95)}
+      {clip(68, 14, 40, 0.55)}
+      {clip(114, 14, 62, 0.8)}
+      {clip(0, 52, 44, 0.6)}
+      {clip(50, 52, 74, 0.95)}
+      {clip(130, 52, 46, 0.5)}
+      {/* Playhead */}
+      <g fill={P.white}>
+        <rect x={95} y={2} width={2.5} height={92} />
+        <path d={`M ${96.25 - 7} 0 L ${96.25 + 7} 0 L ${96.25} 11 Z`} />
+      </g>
+    </svg>
+  );
+};
 
 /** Cinematic: a viewfinder framing the empty middle -- the shot before it exists. */
 export const Viewfinder: React.FC = () => {
-  const s = 118;
-  const arm = 34;
-  const t = 3;
+  const s = 80;
+  const arm = 23;
+  const t = 2.5;
   const c = P.black;
   const corner = (x: number, y: number, sx: number, sy: number) => (
     <g transform={`translate(${x} ${y}) scale(${sx} ${sy})`}>
@@ -107,7 +116,7 @@ export const Viewfinder: React.FC = () => {
       {corner(s, 0, -1, 1)}
       {corner(0, s, 1, -1)}
       {corner(s, s, -1, -1)}
-      <circle cx={s / 2} cy={s / 2} r="4" fill={c} />
+      <circle cx={s / 2} cy={s / 2} r="3" fill={c} />
     </svg>
   );
 };
