@@ -12,6 +12,7 @@ import { cancelRender, continueRender, delayRender, staticFile } from "remotion"
  */
 export const JOST = "Jost";
 export const CORMORANT = "Cormorant Garamond";
+export const PLAYFAIR = "Playfair Display";
 
 const handle = delayRender("Loading self-hosted fonts");
 
@@ -35,6 +36,21 @@ Promise.all([
     url: staticFile("fonts/CormorantGaramond-italic-latin.woff2"),
     format: "woff2",
     weight: "300 700",
+    style: "italic",
+    display: "block",
+  }),
+  loadFont({
+    family: PLAYFAIR,
+    url: staticFile("fonts/PlayfairDisplay-latin.woff2"),
+    format: "woff2",
+    weight: "400 700",
+    display: "block",
+  }),
+  loadFont({
+    family: PLAYFAIR,
+    url: staticFile("fonts/PlayfairDisplay-italic-latin.woff2"),
+    format: "woff2",
+    weight: "400 700",
     style: "italic",
     display: "block",
   }),

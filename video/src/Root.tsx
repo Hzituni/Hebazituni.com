@@ -1,4 +1,5 @@
 import { Composition } from "remotion";
+import { Intro, introDefaults, introSchema } from "./intro/Intro";
 import { TitleCard, titleCardDefaults, titleCardSchema } from "./TitleCard";
 
 /**
@@ -11,6 +12,16 @@ const DURATION = 150; // 5s
 export const RemotionRoot: React.FC = () => {
   return (
     <>
+      <Composition
+        id="Intro-Vertical"
+        component={Intro}
+        schema={introSchema}
+        defaultProps={introDefaults}
+        durationInFrames={150}
+        fps={FPS}
+        width={1080}
+        height={1920}
+      />
       <Composition
         id="TitleCard-Landscape"
         component={TitleCard}
