@@ -14,7 +14,6 @@ import { Backdrop } from "./Backdrop";
 import { Card, EditTimeline, Equalizer, Viewfinder } from "./Card";
 import { DotGrid } from "./DotGrid";
 import { P } from "./palette";
-import { Silhouette } from "./Silhouette";
 
 /** Everything is composed at this size and scaled to the real frame, so the
  *  same layout can be re-cut to other ratios later without re-measuring. */
@@ -155,12 +154,34 @@ export const Intro: React.FC<IntroProps> = ({
               top: HERO.y,
               width: HERO.w,
               height: HERO.h,
-              borderRadius: 34,
-              overflow: "hidden",
-              boxShadow: "0 60px 120px rgba(0,0,0,0.6)",
               ...layer(hero, float(9, 150, 0)),
             }}
           >
+            {/* Edge glow: a warm bloom sitting behind the card, breathing
+                slowly so the still frame never looks frozen. */}
+            <div
+              style={{
+                position: "absolute",
+                inset: -54,
+                borderRadius: 70,
+                background: `radial-gradient(ellipse at 50% 45%, rgba(232,81,31,${
+                  0.6 + Math.sin(frame / 46) * 0.1
+                }) 0%, rgba(232,81,31,0.16) 45%, rgba(232,81,31,0) 72%)`,
+                filter: "blur(34px)",
+              }}
+            />
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                borderRadius: 34,
+                overflow: "hidden",
+                // Glow hugging the border, not just a bloom behind the card.
+                boxShadow: `0 60px 120px rgba(0,0,0,0.62), 0 0 46px rgba(232,81,31,${
+                  0.42 + Math.sin(frame / 46) * 0.08
+                }), 0 0 110px rgba(232,81,31,0.22)`,
+              }}
+            >
             {heroImage ? (
               <Img
                 src={staticFile(heroImage)}
@@ -176,25 +197,14 @@ export const Intro: React.FC<IntroProps> = ({
               <Backdrop w={HERO.w} h={HERO.h} />
             )}
 
-            <div
-              style={{
-                position: "absolute",
-                left: 140,
-                top: HERO.h - 671 + 20,
-              }}
-            >
-              <Silhouette width={470} />
-            </div>
-
-            {/* Scrim: the reference bleeds a gradient up the card's base. It
-                also gives the name one consistent ground instead of half
-                bright wall, half dark figure. */}
+            {/* Scrim, kept light: just enough to seat the name on the
+                photograph without dulling it. */}
             <div
               style={{
                 position: "absolute",
                 inset: 0,
                 background:
-                  "linear-gradient(to bottom, rgba(10,10,7,0) 40%, rgba(10,10,7,0.42) 66%, rgba(10,10,7,0.80) 100%)",
+                  "linear-gradient(to bottom, rgba(10,10,7,0) 46%, rgba(10,10,7,0.34) 70%, rgba(10,10,7,0.74) 100%)",
               }}
             />
 
@@ -231,6 +241,19 @@ export const Intro: React.FC<IntroProps> = ({
               >
                 {lastName}
               </div>
+            </div>
+
+            {/* Lit rim: a hairline that catches at the top-left, the way a
+                real edge would under the wall's light. */}
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  borderRadius: 34,
+                  boxShadow:
+                    "inset 0 0 0 1.5px rgba(255,214,180,0.34), inset 0 1px 0 0 rgba(255,246,236,0.5)",
+                }}
+              />
             </div>
           </div>
 
