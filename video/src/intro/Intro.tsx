@@ -30,6 +30,14 @@ export const introSchema = z.object({
   cardTwo: z.string(),
   cardThree: z.string(),
   accent: zColor(),
+  /**
+   * dark        - the design as approved: near-black ground and dot grid.
+   * transparent - ground and grid dropped, so the cards composite straight
+   *               over your own footage.
+   * green       - the same overlay on chroma green, for editors whose alpha
+   *               support is unreliable (CapCut among them).
+   */
+  ground: z.enum(["dark", "transparent", "green"]),
 });
 
 export type IntroProps = z.infer<typeof introSchema>;
@@ -39,6 +47,7 @@ export const introDefaults: IntroProps = {
   lastName: "ZITUNI",
   wordmark: "HEBAZITUNI.COM",
   heroImage: "hero.jpg",
+  ground: "dark",
   cardOne: "Creative",
   cardTwo: "Cinematic",
   cardThree: "Bold",
@@ -53,6 +62,7 @@ export const Intro: React.FC<IntroProps> = ({
   cardOne,
   cardTwo,
   cardThree,
+  ground,
 }) => {
   const frame = useCurrentFrame();
   const { fps, width, height, durationInFrames } = useVideoConfig();
@@ -127,7 +137,13 @@ export const Intro: React.FC<IntroProps> = ({
   const HERO = { x: 230, y: 470, w: 620, h: 900 };
 
   return (
-    <AbsoluteFill style={{ opacity: exit }}>
+    <AbsoluteFill>
+      {/* Chroma ground sits outside the dissolve, so the fade reveals green
+          and keys away cleanly rather than fading to grey. */}
+      {ground === "green" ? (
+        <AbsoluteFill style={{ backgroundColor: "#00B140" }} />
+      ) : null}
+      <AbsoluteFill style={{ opacity: exit }}>
       <AbsoluteFill
         style={{
           transform: `scale(${scale * exitPush})`,
@@ -140,11 +156,13 @@ export const Intro: React.FC<IntroProps> = ({
             height: STAGE_H,
             left: (width - STAGE_W) / 2,
             top: (height - STAGE_H) / 2,
-            backgroundColor: P.ground,
+            backgroundColor: ground === "dark" ? P.ground : "transparent",
             overflow: "hidden",
           }}
         >
-          <DotGrid w={STAGE_W} h={STAGE_H} opacity={gridIn * 0.9} />
+          {ground === "dark" ? (
+            <DotGrid w={STAGE_W} h={STAGE_H} opacity={gridIn * 0.9} />
+          ) : null}
 
           {/* Hero card */}
           <div
@@ -269,7 +287,7 @@ export const Intro: React.FC<IntroProps> = ({
           <div
             style={{ position: "absolute", left: 55, top: 790, ...layer(cB, float(14, 165, 2.4), 4) }}
           >
-            <Card label={cardOne} variant="frosted" w={345} h={255}>
+            <Card label={cardOne} variant="frosted" w={345} h={255} solid={ground === "green"}>
               <EditTimeline />
             </Card>
           </div>
@@ -291,9 +309,9 @@ export const Intro: React.FC<IntroProps> = ({
               width: 122,
               height: 122,
               borderRadius: 61,
-              background: "rgba(232,224,210,0.12)",
+              background: ground === "green" ? "#23241C" : "rgba(232,224,210,0.12)",
               border: "1px solid rgba(255,251,244,0.22)",
-              backdropFilter: "blur(14px)",
+              backdropFilter: ground === "green" ? undefined : "blur(14px)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -330,6 +348,7 @@ export const Intro: React.FC<IntroProps> = ({
             {wordmark}
           </div>
         </AbsoluteFill>
+      </AbsoluteFill>
       </AbsoluteFill>
     </AbsoluteFill>
   );

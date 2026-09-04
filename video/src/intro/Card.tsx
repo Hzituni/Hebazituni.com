@@ -29,8 +29,20 @@ export const Card: React.FC<{
   readonly w: number;
   readonly h: number;
   readonly children: React.ReactNode;
-}> = ({ label, variant, w, h, children }) => {
-  const skin = skins[variant];
+  /** Chroma-key exports cannot carry translucency: green read through a
+   *  frosted card keys away with the background and punches a hole in it.
+   *  This swaps the frost for the solid colour it resolves to on the dark
+   *  ground, so the card survives the key. */
+  readonly solid?: boolean;
+}> = ({ label, variant, w, h, children, solid = false }) => {
+  const skin =
+    solid && variant === "frosted"
+      ? {
+          background: "#23241C",
+          border: "1px solid rgba(255,251,244,0.20)",
+          color: P.white,
+        }
+      : skins[variant];
   const dim = variant === "paper" ? "rgba(17,18,13,0.55)" : "rgba(255,251,244,0.70)";
   return (
     <div

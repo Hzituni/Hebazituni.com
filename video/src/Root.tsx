@@ -23,6 +23,26 @@ export const RemotionRoot: React.FC = () => {
         height={1920}
       />
       <Composition
+        id="Intro-Vertical-Overlay"
+        component={Intro}
+        schema={introSchema}
+        defaultProps={{ ...introDefaults, ground: "transparent" as const }}
+        durationInFrames={150}
+        fps={FPS}
+        width={1080}
+        height={1920}
+      />
+      <Composition
+        id="Intro-Vertical-Green"
+        component={Intro}
+        schema={introSchema}
+        defaultProps={{ ...introDefaults, ground: "green" as const }}
+        durationInFrames={150}
+        fps={FPS}
+        width={1080}
+        height={1920}
+      />
+      <Composition
         id="TitleCard-Landscape"
         component={TitleCard}
         schema={titleCardSchema}
