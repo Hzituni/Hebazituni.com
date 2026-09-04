@@ -38,7 +38,7 @@ export const introDefaults: IntroProps = {
   firstName: "HEBA",
   lastName: "ZITUNI",
   wordmark: "HEBAZITUNI.COM",
-  heroImage: "",
+  heroImage: "hero.jpg",
   cardOne: "Creative",
   cardTwo: "Cinematic",
   cardThree: "Bold",
@@ -204,7 +204,7 @@ export const Intro: React.FC<IntroProps> = ({
                 position: "absolute",
                 inset: 0,
                 background:
-                  "linear-gradient(to bottom, rgba(10,10,7,0) 46%, rgba(10,10,7,0.34) 70%, rgba(10,10,7,0.74) 100%)",
+                  "linear-gradient(to bottom, rgba(10,10,7,0) 42%, rgba(10,10,7,0.44) 68%, rgba(10,10,7,0.82) 100%)",
               }}
             />
 
