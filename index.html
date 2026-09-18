@@ -645,6 +645,178 @@ footer {
 }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
+/* ── SHOWREEL ── */
+.showreel {
+  background: var(--black);
+  padding: 120px 56px;
+  border-top: 1px solid rgba(216,207,188,0.08);
+}
+.showreel-inner { max-width: 1100px; margin: 0 auto; }
+.reel-intro {
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.85;
+  color: rgba(216,207,188,0.55);
+  max-width: 520px;
+  margin: -44px 0 40px;
+}
+.reel-tile {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  overflow: hidden;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  background: linear-gradient(135deg, var(--olive) 0%, #3a3830 50%, var(--black) 100%);
+}
+.reel-tile video {
+  display: block;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s ease, opacity 0.5s ease;
+}
+.reel-tile:hover video { transform: scale(1.04); }
+.reel-tile::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(to top, rgba(17,18,13,0.85) 0%, rgba(17,18,13,0.05) 60%);
+  opacity: 0.9;
+  transition: opacity 0.5s ease;
+}
+.reel-tile:hover::after { opacity: 0.65; }
+.reel-tile:focus-visible { outline: 1px solid var(--bone); outline-offset: 3px; }
+.reel-feature { aspect-ratio: 16 / 9; margin-bottom: 2px; }
+.reel-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+.reel-grid .reel-tile { aspect-ratio: 4 / 5; }
+.reel-meta {
+  position: absolute;
+  z-index: 3;
+  left: 36px;
+  right: 36px;
+  bottom: 30px;
+  pointer-events: none;
+}
+.reel-cat {
+  display: block;
+  font-family: 'Jost', sans-serif;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--bone-mid);
+  margin-bottom: 10px;
+}
+.reel-title {
+  display: block;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  color: var(--bone);
+  line-height: 1.12;
+}
+.reel-feature .reel-title { font-size: clamp(26px, 3.4vw, 42px); }
+.reel-grid .reel-meta { left: 24px; right: 24px; bottom: 22px; }
+.reel-grid .reel-title { font-size: 21px; }
+.reel-play {
+  position: absolute;
+  z-index: 3;
+  top: 26px;
+  right: 26px;
+  width: 52px;
+  height: 52px;
+  border: 1px solid rgba(216,207,188,0.45);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: var(--bone);
+  pointer-events: none;
+  transition: background 0.4s ease, border-color 0.4s ease, color 0.4s ease;
+}
+.reel-tile:hover .reel-play { background: var(--bone); border-color: var(--bone); color: var(--black); }
+.reel-grid .reel-play { width: 40px; height: 40px; font-size: 10px; top: 18px; right: 18px; }
+.reel-empty-label {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Jost', sans-serif;
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--bone);
+  opacity: 0.4;
+  pointer-events: none;
+  /* Sit above the caption block rather than centred over it — on short tiles
+     dead-centre lands right on top of the title. */
+  padding-bottom: 110px;
+}
+.reel-grid .reel-empty-label { padding-bottom: 88px; }
+.reel-tile.is-empty { cursor: default; }
+/* Nothing to darken behind the text on a placeholder tile, so let the
+   bone-and-olive gradient come through. */
+.reel-tile.is-empty::after { opacity: 0.55; }
+.reel-tile.is-empty video { opacity: 0; }
+.reel-tile.is-empty .reel-empty-label { display: flex; }
+.reel-tile.is-empty .reel-play { display: none; }
+
+/* ── SHOWREEL LIGHTBOX ── */
+.reel-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 56px;
+  background: rgba(10,11,8,0.96);
+}
+.reel-lightbox.open { display: flex; }
+.reel-lightbox video {
+  max-width: 100%;
+  max-height: 100%;
+  box-shadow: 0 30px 90px rgba(0,0,0,0.6);
+}
+.reel-close {
+  position: absolute;
+  top: 28px;
+  right: 32px;
+  width: 46px;
+  height: 46px;
+  border: 1px solid rgba(216,207,188,0.35);
+  border-radius: 50%;
+  background: none;
+  color: var(--bone);
+  font-family: 'Jost', sans-serif;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.reel-close:hover { background: var(--bone); color: var(--black); }
+
+@media (prefers-reduced-motion: reduce) {
+  .reel-tile video, .reel-tile::after { transition: none; }
+  .reel-tile:hover video { transform: none; }
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
   .hero { grid-template-columns: 1fr; }
@@ -658,6 +830,13 @@ footer {
   .step { border-right: none; border-bottom: 1px solid var(--bone); padding: 32px 0 !important; }
   footer { flex-direction: column; gap: 12px; text-align: center; }
   .services, .packages, .process, .contact { padding-left: 28px; padding-right: 28px; }
+  .showreel { padding-left: 28px; padding-right: 28px; }
+  .reel-grid { grid-template-columns: 1fr; }
+  .reel-grid .reel-tile { aspect-ratio: 16 / 10; }
+  .reel-intro { margin-top: -20px; }
+  .reel-meta, .reel-grid .reel-meta { left: 24px; right: 24px; bottom: 22px; }
+  .reel-lightbox { padding: 20px; }
+  .reel-close { top: 16px; right: 16px; }
 }
 </style>
 </head>
@@ -742,12 +921,82 @@ footer {
   </div>
 </section>
 
+<!-- ── SHOWREEL ── -->
+<section class="showreel" id="showreel">
+  <div class="showreel-inner">
+    <div class="section-header reveal">
+      <h2 class="section-title">Motion &amp; <em>montage</em></h2>
+      <span class="section-num">— 01</span>
+    </div>
+
+    <p class="reel-intro reveal">
+      A still holds a moment. Motion holds a mood. A short selection of the films,
+      reels and behind-the-scenes cuts I build alongside every shoot.
+    </p>
+
+    <!-- Drop real files into assets/reel/ — see assets/reel/README.md -->
+    <button class="reel-tile reel-feature reveal" type="button"
+            data-reel="assets/reel/showreel.mp4"
+            aria-label="Play the 2025 showreel">
+      <video src="assets/reel/showreel.mp4" poster="assets/reel/showreel.jpg"
+             muted loop playsinline preload="metadata"></video>
+      <span class="reel-empty-label">Clip coming soon</span>
+      <span class="reel-play" aria-hidden="true">▶</span>
+      <span class="reel-meta">
+        <span class="reel-cat">Showreel · 2025</span>
+        <span class="reel-title">Thirteen years,<br>ninety seconds.</span>
+      </span>
+    </button>
+
+    <div class="reel-grid">
+      <button class="reel-tile reveal" type="button"
+              data-reel="assets/reel/product.mp4"
+              aria-label="Play: Bottles, light, and the slow pour">
+        <video src="assets/reel/product.mp4" poster="assets/reel/product.jpg"
+               muted loop playsinline preload="metadata"></video>
+        <span class="reel-empty-label">Clip coming soon</span>
+        <span class="reel-play" aria-hidden="true">▶</span>
+        <span class="reel-meta">
+          <span class="reel-cat">Product</span>
+          <span class="reel-title">Bottles, light,<br>and the slow pour</span>
+        </span>
+      </button>
+
+      <button class="reel-tile reveal" type="button"
+              data-reel="assets/reel/portrait.mp4"
+              aria-label="Play: The frame before the smile">
+        <video src="assets/reel/portrait.mp4" poster="assets/reel/portrait.jpg"
+               muted loop playsinline preload="metadata"></video>
+        <span class="reel-empty-label">Clip coming soon</span>
+        <span class="reel-play" aria-hidden="true">▶</span>
+        <span class="reel-meta">
+          <span class="reel-cat">Portrait</span>
+          <span class="reel-title">The frame<br>before the smile</span>
+        </span>
+      </button>
+
+      <button class="reel-tile reveal" type="button"
+              data-reel="assets/reel/process.mp4"
+              aria-label="Play: How a brief becomes a world">
+        <video src="assets/reel/process.mp4" poster="assets/reel/process.jpg"
+               muted loop playsinline preload="metadata"></video>
+        <span class="reel-empty-label">Clip coming soon</span>
+        <span class="reel-play" aria-hidden="true">▶</span>
+        <span class="reel-meta">
+          <span class="reel-cat">Behind the lens</span>
+          <span class="reel-title">How a brief<br>becomes a world</span>
+        </span>
+      </button>
+    </div>
+  </div>
+</section>
+
 <!-- ── SERVICES ── -->
 <section class="services" id="services">
   <div class="services-inner">
     <div class="section-header reveal">
       <h2 class="section-title">What I <em>offer</em></h2>
-      <span class="section-num">— 01</span>
+      <span class="section-num">— 02</span>
     </div>
 
     <!-- CATEGORY 01 -->
@@ -842,7 +1091,7 @@ footer {
   <div class="packages-inner">
     <div class="section-header reveal">
       <h2 class="section-title">Photography <em>packages</em></h2>
-      <span class="section-num">— 02</span>
+      <span class="section-num">— 03</span>
     </div>
 
     <!-- PRODUCT PHOTOGRAPHY -->
@@ -941,7 +1190,7 @@ footer {
   <div class="process-inner">
     <div class="section-header reveal">
       <h2 class="section-title">The creative <em>journey</em></h2>
-      <span class="section-num">— 03</span>
+      <span class="section-num">— 04</span>
     </div>
     <div class="steps reveal">
       <div class="step">
@@ -1002,6 +1251,12 @@ footer {
   </div>
 </section>
 
+<!-- ── SHOWREEL LIGHTBOX ── -->
+<div class="reel-lightbox" id="reelLightbox" role="dialog" aria-modal="true" aria-label="Video player">
+  <button class="reel-close" type="button" aria-label="Close video">✕</button>
+  <video id="reelPlayer" controls playsinline preload="none"></video>
+</div>
+
 <!-- ── FOOTER ── -->
 <footer>
   <div class="footer-name">Heba Zituni</div>
@@ -1019,6 +1274,67 @@ footer {
     });
   }, { threshold: 0.08 });
   reveals.forEach(el => observer.observe(el));
+
+  /* ── SHOWREEL ── */
+  (function () {
+    const lightbox = document.getElementById('reelLightbox');
+    const player   = document.getElementById('reelPlayer');
+    const closeBtn = document.querySelector('.reel-close');
+    const tiles    = document.querySelectorAll('.reel-tile');
+    if (!lightbox || !player || !closeBtn || !tiles.length) return;
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let lastFocus = null;
+
+    tiles.forEach(tile => {
+      const vid = tile.querySelector('video');
+
+      // No file dropped in yet — fall back to the gradient placeholder.
+      const markEmpty = () => tile.classList.add('is-empty');
+      vid.addEventListener('error', markEmpty);
+      // This script runs at the end of <body>, so a missing file has usually
+      // already failed by now and the event above never reaches us — check the
+      // element's settled state too.
+      if (vid.error || vid.networkState === HTMLMediaElement.NETWORK_NO_SOURCE) markEmpty();
+
+      // Only play tiles that are actually on screen; poster stays put if the
+      // visitor asked for reduced motion.
+      if (!reduceMotion) {
+        new IntersectionObserver(entries => {
+          entries.forEach(e => {
+            if (e.isIntersecting) vid.play().catch(() => {});
+            else vid.pause();
+          });
+        }, { threshold: 0.25 }).observe(tile);
+      }
+
+      tile.addEventListener('click', () => {
+        if (tile.classList.contains('is-empty')) return;
+        lastFocus = tile;
+        player.src = tile.dataset.reel;
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        player.play().catch(() => {});
+        closeBtn.focus();
+      });
+    });
+
+    function closeReel() {
+      lightbox.classList.remove('open');
+      player.pause();
+      player.removeAttribute('src');
+      player.load();
+      document.body.style.overflow = '';
+      if (lastFocus) lastFocus.focus();
+    }
+
+    closeBtn.addEventListener('click', closeReel);
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeReel(); });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && lightbox.classList.contains('open')) closeReel();
+    });
+  })();
+
 </script>
 </body>
 </html>
